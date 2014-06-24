@@ -24,15 +24,51 @@ class MenusController < ApplicationController
     servings = params["servings"].to_i
     
 
+    @valid_restaurants = find_valid_restaurants(address, cuisines, budget_low)
+    
 
-    @restaurant = find_restaurant(address, cuisines, budget_low)
+    # Check if @restaurant found a valid restaurant
+    if @valid_restaurants.is_a? Symbol
+      if @valid_restaurants == :no_restaurants
+        @error = { 
+          id: 1
+          message: "Sorry! We don't have any restaurants in our database that deliver to your area."
+        }
+      elsif @valid_restaurants == :no_valid_restaurants
+        @error = { 
+          id: 2
+          message: "We found restaurants in your area, but you need to broaden your criteria. Please choose more cuisines or raise your budget."
+        }
+      end
+    else
+      3.times do 
+        @restaurant = find_restaurant(address, cuisines, budget_low)
 
-    logger.debug "Restaurant: #{@restaurant}"
+        @order = build_order(@restaurant["menu"], budget_low, budget_high, servings)
+        if @order != :no_possibilities
+          break
+        end
+      end
 
-    @order = build_order(@restaurant["menu"], budget_low, budget_high, servings)
+      if @order == :no_possibilities
+        @error = { 
+          id: 3
+          message: "We can't seem to find a meal with that many servings. Please change budget, cuisines or servings"
+        }
+      end
+    end
+
+    if @error
+      render :json => @error
+    else
+      render :json => @order
+    end
+    
+
+   
 
 
-    render :json => @order
+    
 
     # render :json => order_args
 
@@ -40,7 +76,11 @@ class MenusController < ApplicationController
 
   def build_order(restaurant, budget_low, budget_high, servings)
     possibilities = recursive_menu_gen(restaurant, [], budget_low, budget_high)
-    possibilities.sample(servings)
+    if possibilities.length < servings
+      return :no_possibilities
+    else
+      return possibilities.sample(servings)
+    end
   end
 
   def build_tray(orders)
@@ -77,23 +117,23 @@ class MenusController < ApplicationController
 # [menu item id]/[qty]+[menu item id2]/[qty2] For example: 3270/2+3263/1,3279 Means 2 of menu item 3270 
 # (with no sub options) and 1 of item num 3263 with sub option 3279.
 
-  def find_restaurant(address, cuisines, budget_low)
+  def valid_restaurants(address, cuisines, budget_low)
     # Get a list of all restaurants that deliver to this address from the API
     @all_restaurants = @api.delivery_list(address)
+    
     logger.debug "There are #{@all_restaurants.count} restaurants that deliver to this address."
-
-    # Did we find at least one restaurant?
     return :no_restaurants if @all_restaurants.count == 0
       
     # Filter down to the valid restaurants for this purpose
-    @valid_restaurants = get_valid_restaurants(@all_restaurants, cuisines, budget_low)
-
-    return :no_valid_restaurants if @valid_restaurants.count == 0
+    @valid_restaurants = get_valid_restaurants(@all_restaurants, cuisines, budget_low)  
 
     logger.debug "We found #{@valid_restaurants.count} restaurants that meet the criteria."
+    return :no_valid_restaurants if @valid_restaurants.count == 0
+  end
 
+  def find_restaurant(restaurants)
     # Grab a random validated restaurant!
-    @chosen_restaurant = @valid_restaurants.sample
+    @chosen_restaurant = restaurants.sample
 
     logger.debug "We chose #{@valid_restaurants.count} restaurants."
 
