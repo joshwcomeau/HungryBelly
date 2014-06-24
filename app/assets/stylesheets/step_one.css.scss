@@ -1,0 +1,84 @@
+.cuisine_container {
+  position: relative;
+  background: #e6e7e8;
+  width:65%;
+  height: 100vh;
+}
+
+.cuisines {
+  width: 65%;
+  margin: 0 auto;
+}
+.cuisine_btns{
+  list-style: none;
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+}
+
+.cuisine_btns li{
+  padding-bottom: 10px;
+}
+
+.cat_btn {
+  color: #fff;
+  background-color: #ee3e23;
+  border: none;
+  font-size: 24px;
+  width: 100%;
+  padding: 20px 0px;
+}
+
+.craving_header {
+  padding-top: 4.5rem; 
+  padding-bottom: 1.5rem;
+  font-size: 1.75rem;
+}
+
+.lets_eat {
+  width: 35%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.eat_btn{
+  color: #ee3e23;
+  background-color: #fff;
+  border: 3px solid #ee3e23;
+  font-size: 24px;
+  border-radius:10px;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+
+
+.lets_eat_buttons {
+  text-align: center;
+  margin-top: 40%;
+}
+
+.lets_eat_buttons button {
+  width: 75%;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.highlight{
+  background: #009344;
+}
+
+.cat_btn:hover{
+  color: #CCC;
+
+}
+
+
+.eat_btn:hover{
+  background-color: #009344;
+  border-color: #009344;
+  color:#FFF;
+  transition: 0.2s;
+}

@@ -1,0 +1,278 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: 'Cabin', sans-serif;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+
+
+.clearfix {
+  display: inline-block;
+}
+
+/*--------*/
+
+
+.summary_container{
+  background: #2bb572;
+  width:450px;
+  min-height: 100%;
+  float: left;
+}
+
+
+.summary_title {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.summary_title_grp {
+  margin-top: 10px;
+}
+
+.summary_table {
+  border: 3px solid #f2f3f4;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.summary_item_title{
+  border-bottom: 3px solid #f2f3f4;
+  background-color: #f2f3f4;
+  color: #2bb572;
+  font-size: 33px;
+  text-align: center;
+  padding: 5px 0px;
+}
+
+.summary_item {
+  color: #fff;
+  font-size: 28px;
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.subtotal_container {
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   overflow: hidden;
+   padding-top: 0px;
+
+}
+
+.subtotal_title, .tip_title, .total_title {
+  font-size: 30px;
+  color: #000;
+  padding: 40px 0px 10px 0px;
+}
+
+.price_total,.tip_total, .final_total {
+  background-color: #d1d2d4;
+  width: 300px;
+  font-size: 43px;
+  color: #3e3e3f;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.price_total, .final_total {
+  padding: 6px 0px;
+}
+
+.tip_total {
+  outline: none;
+  border-width: 0px;
+  text-align: center;
+  font-size: 43px;
+}
+
+.input {
+  padding: 0px;
+}
+
+.take_money {
+  color: #2bb572;
+  background-color: #fff;
+  border: 3px solid #2bb572;
+  font-size: 22px;
+  padding: 10px 10px;
+  text-align: center;
+  outline: none;
+  margin-top: 25px;
+}
+
+.take_money:hover{
+  background-color: #2bb572;
+  color: #fff;
+}
+
+
+.menu_items {
+  display: none;
+  width: 90%;
+  margin: 15px auto;
+  background: rgba(255,255,255,0.95);
+  padding: 10px;
+  border: 1px solid #1E5066;
+  color: #000;
+}
+.menu_item {
+  display: inline-block;
+  width: 25%;
+  padding: 0px 12px;
+  vertical-align: top;
+}
+
+.menu_item strong {
+  font-size: 1.25rem;
+}
+.menu_item .mi_descrip {
+  font-size: 0.9rem;
+  margin: 10px 0px;
+}
+
+
+#hours, #minutes, .dot {
+    padding: 10px 5px;
+}
+
+.timer_label {
+   text-align: center;
+}
+
+.hr_label, .min_label, .sec_label {
+    color: #fff;
+    padding: 0px 8px;
+}
+
+.custom_container {
+  margin-top: 20px;
+}
+
+#countdown {
+  border-top: 1px solid #fff;
+  border-left: 2px solid #fff;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-radius: 6px;
+  width: 40%;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #56B4Eb;
+  color: #fff;
+  padding: 10px 0px;
+  font-size: 40px;
+}
+.fa-user {
+  margin: 0 2px;
+}
+
+.spinning_loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 20%;
+  margin: auto;
+
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(-30deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(60deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(-30deg);
+  }
+
+}
+.spinning_loader
+{
+  -webkit-animation-name:             rotate; 
+  -webkit-animation-duration:         1.5s; 
+  -webkit-animation-iteration-count:  infinite;
+  -webkit-transition-timing-function: linear;
+}
+
+
+.final_success {
+  text-shadow: 
+   0.5px 0.5px 0px #004866,
+   1px 1px 0px #004866,
+   1.5px 1.5px 0px #004866,
+   2px 2px 0px #004866,
+   2.5px 2.5px 0px #004866,
+   3px 3px 0px #004866;
+}
