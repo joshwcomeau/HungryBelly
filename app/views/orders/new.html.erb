@@ -535,34 +535,46 @@ jQuery('.tip_total').keyup(function () {
                 data: { cuisines: selected_cuisines, firstname : firstname, lastname : lastname, street : street, zip : zip, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
                 success: function(data) {
 
-                  $("#pbar").css({width: '75%'});
-                  $(".hider").fadeOut(500);
+                  console.log(data);
 
-                  $(".step3").animate({
-                    right: 0
-                  }, 1000);
+                  if ( data["id"] == 1 ) {
 
-                 console.log(data);
+                  } else if ( data["id"] == 2 ) {
+
+                  } else if ( data["id"] == 3 ) {
+
+                  } else {
+                    $("#pbar").css({width: '75%'});
+                    $(".hider").fadeOut(500);
+
+                    $(".step3").animate({
+                      right: 0
+                    }, 1000);
+
+                   
 
 
-                  var subtotal = 0;
+                    var subtotal = 0;
 
-                  _.each(data, function(item) {
-                    $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
+                    _.each(data, function(item) {
+                      $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
 
 
 
-                    subtotal += parseFloat(item["price"]);
+                      subtotal += parseFloat(item["price"]);
 
-                  });
+                    });
 
-                  console.log(subtotal);
+                    console.log(subtotal);
 
-                  var price_string = subtotal.toString().substr(0,5)
+                    var price_string = subtotal.toString().substr(0,5)
 
-                  $("#price_summary").html(price_string);
-                  $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
-                  $("#total_summary").html( (subtotal * 1.15).toFixed(2) );
+                    $("#price_summary").html(price_string);
+                    $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
+                    $("#total_summary").html( (subtotal * 1.15).toFixed(2) );                  
+                  }
+
+                  
 
                   // $('.addressgiven').html(street);
                   // $('.servingschosen').html(servings);
