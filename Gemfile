@@ -55,3 +55,5 @@ gem 'semantic-ui-rails'
 gem "font-awesome-rails"
 
 gem 'rails_12factor', group: :production
+
+ruby "2.1.0"
