@@ -114,7 +114,7 @@
 
       <div class="budgetslider"></div>
 
-      <h3 class="budg results" id="input-with-keypress"  style="text-align: center; margin-top: 10px; font-size: 1.45rem;"> $10-15 </h3>
+      <h3 class="budg results" id="input-with-keypress"  style="text-align: center; margin-top: 10px; font-size: 1.45rem;"> $15 - 20 </h3>
 
     </div>
   </div>
@@ -206,7 +206,7 @@
         </tr>
         <tr>
           <td class="summary_item servingschosen">
-            <span id="servings_summary"></span>
+            <span id="servings_summary">1</span>
           </td>
         </tr>
       </table>
@@ -219,7 +219,7 @@
         </tr>
         <tr>
           <td class="summary_item addressgiven">
-            <span id="street_summary"></span>, <span id="zip_summary"></span>
+            <span id="street_summary">1540 Broadway</span>, <span id="zip_summary">10036</span>
           </td>
         </tr>
       </table>
@@ -446,7 +446,7 @@ jQuery('.tip_total').keyup(function () {
           step:5,
           connect: "lower",
           range: {
-            'min': 10,
+            'min': 15,
             'max': 40
           }
         });
@@ -525,7 +525,7 @@ jQuery('.tip_total').keyup(function () {
                 var zip = $('.zip').val();
 
                 var lower = $('.budgetslider').val();
-                var upper = parseInt( $('.budgetslider').val() ) + 30;
+                var upper = parseInt( $('.budgetslider').val() ) + 5;
 
                 var servings = $('#slider').val();
 

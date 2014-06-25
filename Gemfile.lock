@@ -33,6 +33,7 @@ GEM
     autoprefixer-rails (1.3.1.20140619)
       execjs
     builder (3.2.2)
+    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -68,6 +69,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.2)
     mime-types (1.25.1)
     minitest (5.3.5)
     multi_json (1.10.1)
@@ -75,6 +77,10 @@ GEM
       json-schema (= 2.1.3)
     pg (0.17.1)
     polyglot (0.3.5)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -120,6 +126,7 @@ GEM
       less-rails
     semantic-ui-sass (0.16.1.0)
       sass (~> 3.2)
+    slop (3.5.0)
     spring (1.1.3)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -161,6 +168,7 @@ DEPENDENCIES
   less-rails
   ordrin
   pg
+  pry
   quiet_assets
   rails (= 4.1.1)
   rails_12factor
