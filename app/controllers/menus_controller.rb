@@ -163,7 +163,7 @@ class MenusController < ApplicationController
   end
 
   def setup_api
-    @api = Ordrin::APIs.new(ENV['ORDRIN_SECRET'], :test)
+    @api = Ordrin::APIs.new('NeDTpROHKr0wT6V0pYsdjmxxvKpazxe1W7jg4Pt02PQ', :test)
   end
 
 
