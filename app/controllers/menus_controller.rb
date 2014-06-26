@@ -120,13 +120,15 @@ class MenusController < ApplicationController
   def find_valid_restaurants(address, cuisines, budget_low)
     # Get a list of all restaurants that deliver to this address from the API
     @all_restaurants = @api.delivery_list(address)
-    
+
+    puts "There are #{@all_restaurants.count} restaurants that deliver to this address."
     logger.debug "There are #{@all_restaurants.count} restaurants that deliver to this address."
     return :no_restaurants if @all_restaurants.count == 0
       
     # Filter down to the valid restaurants for this purpose
     @valid_restaurants = get_valid_restaurants(@all_restaurants, cuisines, budget_low)  
 
+    puts "We found #{@valid_restaurants.count} restaurants that meet the criteria."
     logger.debug "We found #{@valid_restaurants.count} restaurants that meet the criteria."
     return :no_valid_restaurants if @valid_restaurants.count == 0
 
