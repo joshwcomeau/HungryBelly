@@ -25,6 +25,9 @@ class MenusController < ApplicationController
     
 
     @valid_restaurants = find_valid_restaurants(address, cuisines, budget_low)
+
+    puts "WE GOT VALID"
+
     
 
     # Check if @restaurant found a valid restaurant
@@ -41,6 +44,7 @@ class MenusController < ApplicationController
         }
       end
     else
+      puts "ITS A VALID ONE YO!!!"
       3.times do 
         @restaurant = find_restaurant(@valid_restaurants)
 
