@@ -29,7 +29,7 @@ class MenusController < ApplicationController
 
     if city.nil?
       @error = { 
-        id: 1,
+        error_id: 1,
         message: "Sorry! We don't have any restaurants in our database that deliver to your area."
       }
     else
@@ -39,17 +39,17 @@ class MenusController < ApplicationController
       if @valid_restaurants.is_a? Symbol
         if @valid_restaurants == :no_restaurants
           @error = { 
-            id: 1,
+            error_id: 1,
             message: "Sorry! We don't have any restaurants in our database that deliver to your area."
           }
         elsif @valid_restaurants == :no_valid_restaurants
           @error = { 
-            id: 2,
+            error_id: 2,
             message: "We found restaurants in your area, but you need to broaden your criteria. Please choose more cuisines or raise your budget."
           }
         end
       else
-        puts "ITS A VALID ONE YO!!!"
+        
         3.times do 
           @restaurant = find_restaurant(@valid_restaurants)
 
@@ -61,7 +61,7 @@ class MenusController < ApplicationController
 
         if @order == :no_possibilities
           @error = { 
-            id: 3,
+            error_id: 3,
             message: "We can't seem to find a meal with that many servings. Please change budget, cuisines or servings"
           }
         end

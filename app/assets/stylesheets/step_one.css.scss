@@ -27,6 +27,7 @@
   font-size: 24px;
   width: 100%;
   padding: 20px 0px;
+  cursor: pointer;
 }
 
 .craving_header {
@@ -51,6 +52,7 @@
   border-radius:10px;
   padding: 20px 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 
@@ -67,18 +69,14 @@
 }
 
 .highlight{
-  background: #009344;
+  background: #00A5A8;
 }
 
-.cat_btn:hover{
-  color: #CCC;
-
-}
 
 
 .eat_btn:hover{
-  background-color: #009344;
-  border-color: #009344;
+  background-color: #00A5A8;
+  border-color: #00A5A8;
   color:#FFF;
   transition: 0.2s;
 }

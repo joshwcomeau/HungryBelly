@@ -163,6 +163,7 @@ html, body {
   text-align: center;
   outline: none;
   margin-top: 25px;
+  cursor: pointer;
 }
 
 .take_money:hover{

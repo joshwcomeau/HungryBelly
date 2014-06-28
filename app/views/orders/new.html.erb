@@ -12,10 +12,10 @@
 
 </div>
 
-<div id="apologypage" style="display: none; position: absolute; z-index: 202; width: 100%; height: 100%; background: #333; color: #FFF; text-align: center;">
+<div id="apologypage" style="display: none; position: absolute; z-index: 202; width: 100%; height: 100%; background: #BA0D00; color: #FFF; text-align: center;">
   <h2 style="font-size: 4rem; margin-top: 15%;">Oh Noes!</h2>
-  <p style="margin-top: 2rem;">We don't have any restaurants that deliver to your area. Sorry about that!</p>
-  <p style="margin-top: 1rem; font-size: 1.6rem;"><a href="" style="color: #CCF">Try A Different Address</a></p>
+  <p id="apology_message" style="margin-top: 2rem;">We don't have any restaurants that deliver to your area. Sorry about that!</p>
+  <p style="margin-top: 1rem; font-size: 1.6rem;"><a href="" style="color: #CCF">Try Again</a></p>
 </div>
 
 <div class="container step0" style="">
@@ -283,7 +283,7 @@
         <span class="dot">:</span>
         <span id="seconds">59</span>
     </div>
-</div>
+  </div>
 
   <div class="menu_items">
 
@@ -540,14 +540,13 @@
             data: { cuisines: selected_cuisines, firstname : firstname, lastname : lastname, street : street, zip : zip, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
             success: function(data) {
 
+              console.log(data["error_id"]);
 
-              if ( data["id"] == 1 ) {
-                console.log("Sorry! We don't have any restaurants in our database that deliver to your area.")
+
+              if ( data["error_id"] != undefined ) {
                 // Not valid for this user. Show an apology page.
+                $("#apology_message").html(data["message"]);
                 $("#apologypage").fadeIn(1000);
-              } else if ( data["id"] == 2 ) {
-
-              } else if ( data["id"] == 3 ) {
 
               } else {
                 $("#pbar").css({width: '75%'});
