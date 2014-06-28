@@ -334,10 +334,6 @@ jQuery('.tip_total').keyup(function () {
       }, 1000);
     });
 
-    $("#red").click(function() {
-      $(".hider").fadeIn(500);
-    });
-
     $(".take_money").click(function() {
       $("#pbar").css({width: '100%'})
       $(".step4").animate({
@@ -514,75 +510,73 @@ jQuery('.tip_total').keyup(function () {
         });
 
         $('.feedme').click(function(){
+          $(".hider").fadeIn(500);
+
+            var firstname = $('.firstname').val();
+
+            var lastname = $('.lastname').val();
+
+            var street = $('.street').val();
+
+            var zip = $('.zip').val();
+
+            var lower = $('.budgetslider').val();
+            var upper = parseInt( $('.budgetslider').val() ) + 5;
+
+            var servings = $('#slider').val();
+
+         $.ajax({
+            type: "POST", // use method specified in form attributes
+            url: '<%= orders_path %>', // use action specified in form attributes (servlet)
+            data: { cuisines: selected_cuisines, firstname : firstname, lastname : lastname, street : street, zip : zip, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
+            success: function(data) {
 
 
-                var firstname = $('.firstname').val();
+              if ( data["id"] == 1 ) {
 
-                var lastname = $('.lastname').val();
+              } else if ( data["id"] == 2 ) {
 
-                var street = $('.street').val();
+              } else if ( data["id"] == 3 ) {
 
-                var zip = $('.zip').val();
+              } else {
+                $("#pbar").css({width: '75%'});
+                $(".hider").fadeOut(500);
 
-                var lower = $('.budgetslider').val();
-                var upper = parseInt( $('.budgetslider').val() ) + 5;
+                $(".step3").animate({
+                  right: 0
+                }, 1000);
 
-                var servings = $('#slider').val();
-
-             $.ajax({
-                type: "POST", // use method specified in form attributes
-                url: 'http://localhost:3000/menus', // use action specified in form attributes (servlet)
-                data: { cuisines: selected_cuisines, firstname : firstname, lastname : lastname, street : street, zip : zip, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
-                success: function(data) {
-
-                  console.log(data);
-
-                  if ( data["id"] == 1 ) {
-
-                  } else if ( data["id"] == 2 ) {
-
-                  } else if ( data["id"] == 3 ) {
-
-                  } else {
-                    $("#pbar").css({width: '75%'});
-                    $(".hider").fadeOut(500);
-
-                    $(".step3").animate({
-                      right: 0
-                    }, 1000);
-
-                   
+               
 
 
-                    var subtotal = 0;
+                var subtotal = 0;
 
-                    _.each(data, function(item) {
-                      $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
+                _.each(data, function(item) {
+                  $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
 
 
 
-                      subtotal += parseFloat(item["price"]);
+                  subtotal += parseFloat(item["price"]);
 
-                    });
-
-                    console.log(subtotal);
-
-                    var price_string = subtotal.toString().substr(0,5)
-
-                    $("#price_summary").html(price_string);
-                    $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
-                    $("#total_summary").html( (subtotal * 1.15).toFixed(2) );                  
-                  }
-
-                  
-
-                  // $('.addressgiven').html(street);
-                  // $('.servingschosen').html(servings);
-                  // $('.menu_selection').html();
+                });
 
 
-                }
-            });
+                var price_string = subtotal.toString().substr(0,5)
+
+                $("#price_summary").html(price_string);
+                $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
+                $("#total_summary").html( (subtotal * 1.15).toFixed(2) );                  
+              }
+
+              
+
+              // $('.addressgiven').html(street);
+              // $('.servingschosen').html(servings);
+              // $('.menu_selection').html();
+
+
+            }
+          });
 
 
         });
