@@ -8,57 +8,63 @@ class MenusController < ApplicationController
     # Build Address object.
     zip = params[:zip]
     addr = params[:street]
-    city = zip.to_region(:city => true)
-    state = zip.to_region(:state => true)
-    address = {
-      datetime: 'ASAP',
-      addr:     addr,
-      city:     city,
-      zip:      zip
-    }
 
-    # Get order info from params
-    cuisines = params["cuisines"]
-    budget_low = params["lower"].to_i
-    budget_high = params["upper"].to_i
-    servings = params["servings"].to_i
+    if zip =~ /(^[\d]{5}$|^[\d]{5}\-[\d]{4}$)/
+      city = zip.to_region(:city => true)
+      state = zip.to_region(:state => true)
+      address = {
+        datetime: 'ASAP',
+        addr:     addr,
+        city:     city,
+        zip:      zip
+      }
+
+      # Get order info from params
+      cuisines = params["cuisines"]
+      budget_low = params["lower"].to_i
+      budget_high = params["upper"].to_i
+      servings = params["servings"].to_i
+    end
     
 
-    @valid_restaurants = find_valid_restaurants(address, cuisines, budget_low)
-
-    puts "WE GOT VALID"
-
-    
-
-    # Check if @restaurant found a valid restaurant
-    if @valid_restaurants.is_a? Symbol
-      if @valid_restaurants == :no_restaurants
-        @error = { 
-          id: 1,
-          message: "Sorry! We don't have any restaurants in our database that deliver to your area."
-        }
-      elsif @valid_restaurants == :no_valid_restaurants
-        @error = { 
-          id: 2,
-          message: "We found restaurants in your area, but you need to broaden your criteria. Please choose more cuisines or raise your budget."
-        }
-      end
+    if city.nil?
+      @error = { 
+        id: 1,
+        message: "Sorry! We don't have any restaurants in our database that deliver to your area."
+      }
     else
-      puts "ITS A VALID ONE YO!!!"
-      3.times do 
-        @restaurant = find_restaurant(@valid_restaurants)
+      @valid_restaurants = find_valid_restaurants(address, cuisines, budget_low)
 
-        @order = build_order(@restaurant["menu"], budget_low, budget_high, servings)
-        if @order != :no_possibilities
-          break
+      # Check if @restaurant found a valid restaurant
+      if @valid_restaurants.is_a? Symbol
+        if @valid_restaurants == :no_restaurants
+          @error = { 
+            id: 1,
+            message: "Sorry! We don't have any restaurants in our database that deliver to your area."
+          }
+        elsif @valid_restaurants == :no_valid_restaurants
+          @error = { 
+            id: 2,
+            message: "We found restaurants in your area, but you need to broaden your criteria. Please choose more cuisines or raise your budget."
+          }
         end
-      end
+      else
+        puts "ITS A VALID ONE YO!!!"
+        3.times do 
+          @restaurant = find_restaurant(@valid_restaurants)
 
-      if @order == :no_possibilities
-        @error = { 
-          id: 3,
-          message: "We can't seem to find a meal with that many servings. Please change budget, cuisines or servings"
-        }
+          @order = build_order(@restaurant["menu"], budget_low, budget_high, servings)
+          if @order != :no_possibilities
+            break
+          end
+        end
+
+        if @order == :no_possibilities
+          @error = { 
+            id: 3,
+            message: "We can't seem to find a meal with that many servings. Please change budget, cuisines or servings"
+          }
+        end
       end
     end
 
@@ -125,15 +131,11 @@ class MenusController < ApplicationController
     # Get a list of all restaurants that deliver to this address from the API
     @all_restaurants = @api.delivery_list(address)
 
-    puts "There are #{@all_restaurants.count} restaurants that deliver to this address."
-    logger.debug "There are #{@all_restaurants.count} restaurants that deliver to this address."
     return :no_restaurants if @all_restaurants.count == 0
       
     # Filter down to the valid restaurants for this purpose
     @valid_restaurants = get_valid_restaurants(@all_restaurants, cuisines, budget_low)  
 
-    puts "We found #{@valid_restaurants.count} restaurants that meet the criteria."
-    logger.debug "We found #{@valid_restaurants.count} restaurants that meet the criteria."
     return :no_valid_restaurants if @valid_restaurants.count == 0
 
     @valid_restaurants
@@ -143,7 +145,6 @@ class MenusController < ApplicationController
     # Grab a random validated restaurant!
     @chosen_restaurant = restaurants.sample
 
-    logger.debug "We chose #{@valid_restaurants.count} restaurants."
 
     # Get restaurant info from API
     r_object = {

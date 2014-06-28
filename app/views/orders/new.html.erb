@@ -12,7 +12,13 @@
 
 </div>
 
-<div class="container step0" style="display: none;">
+<div id="apologypage" style="display: none; position: absolute; z-index: 202; width: 100%; height: 100%; background: #333; color: #FFF; text-align: center;">
+  <h2 style="font-size: 4rem; margin-top: 15%;">Oh Noes!</h2>
+  <p style="margin-top: 2rem;">We don't have any restaurants that deliver to your area. Sorry about that!</p>
+  <p style="margin-top: 1rem; font-size: 1.6rem;"><a href="" style="color: #CCF">Try A Different Address</a></p>
+</div>
+
+<div class="container step0" style="">
   <div>
     <h2 style="font-size: 3rem;"><strong>Hungry Belly</strong> is a food-ordering service <strong>unlike any other.</strong></h2>
     <h5 style="font-size: 1.6rem; margin: 20px 0px 30px 0px">With a couple of baseline criteria, we randomly select an appropriate restaurant and meal for you.</h5>
@@ -30,10 +36,9 @@
   </div>
 </div>
 
-<!-- FIRST STEP AFTER LANDING -->
 <header class="top_header">
   <div class="ui green active striped progress" id="top_progress">
-    <div class="bar" id="pbar" style="width: 25%; height: 100%;"></div>
+    <div class="bar" id="pbar" style="width: 1%; height: 100%;"></div>
   </div>
   <div class="logo_corner">
     <%= image_tag 'logo.svg' %>
@@ -289,13 +294,6 @@
 
 <script>
 
-jQuery('.tip_total').keyup(function () {
-    this.value = this.value.replace(/[^0-9\.]/g,'');
-});
-
- $(".tip_total").blur(function() {
-      $(this).val(Number($(this).val()).toFixed(2));
-  });
 
 
 </script>
@@ -303,11 +301,24 @@ jQuery('.tip_total').keyup(function () {
 <script>
 
   $(document).ready(function(){
+    $('.tip_total').keyup(function () {
+      this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
+
+    $(".tip_total").blur(function() {
+      $(this).val(Number($(this).val()).toFixed(2));
+      $("#total_summary").html(
+        (parseFloat($(this).val()) + parseFloat($("#price_summary").html())).toFixed(2)
+      );
+    });
 
     var selected_cuisines = [];
 
     $(".show_first_step").click(function() {
-      $(".step0").slideUp(1000);
+
+      $(".step0").slideUp(1000, function() {
+        $("#pbar").css({width: '25%'})
+      });
     });
 
     $('.ui.checkbox')
@@ -533,7 +544,9 @@ jQuery('.tip_total').keyup(function () {
 
 
               if ( data["id"] == 1 ) {
-
+                console.log("Sorry! We don't have any restaurants in our database that deliver to your area.")
+                // Not valid for this user. Show an apology page.
+                $("#apologypage").fadeIn(1000);
               } else if ( data["id"] == 2 ) {
 
               } else if ( data["id"] == 3 ) {
