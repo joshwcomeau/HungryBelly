@@ -1,12 +1,3 @@
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>noUiSlider Example</title>
-  </head>
-
-  <body>
-
 <div class="hider" style="display: none; position: absolute; z-index: 101; width: 100%; height: 100%; background: rgba(255,255,255,0.8);">
   <%= image_tag "logo.svg", class: 'spinning_loader' %>
 
@@ -331,12 +322,29 @@
 
     // BUTTON CLICKS TO GO TO NEXT PAGE
 
-    $(".eat_btn").click(function() {
-      $("#pbar").css({width: '50%'})
-      $(".step2").animate({
-        right: 0
-      }, 1000);
+    $("#readytoeat").click(function() {
+      if ( selected_cuisines.length > 0 ) {
+        goToStepTwo()
+      } else {
+        alert("Please select at least 1 cuisine, or click \"I'm Not Picky\"")
+      }
     });
+
+    $("#idgas").click(function() {
+
+      $( ".cat_btn" ).each(function() {
+        $( this ).addClass( "highlight" );
+        selected_cuisines = [];
+        selected_cuisines.push( $(this).attr("value") );
+      });
+
+       $("#cuisine_summary").html("Random");
+
+      $(".cat_btn").addClass("highlight");
+
+      goToStepTwo()
+    });
+
 
     $(".take_money").click(function() {
       $("#pbar").css({width: '100%'})
@@ -369,8 +377,11 @@
       return selected_cuisines
     }
 
-    function goToStepTwo(){
-
+    function goToStepTwo() {
+      $("#pbar").css({width: '50%'})
+        $(".step2").animate({
+          right: 0
+        }, 1000);
     }
 
     var normal_logo = "<%= asset_path 'logo.svg' %>";
@@ -382,25 +393,7 @@
       $(this).attr("src", normal_logo );
     });
 
-    $("#idgas").click(function() {
-
-      $( ".cat_btn" ).each(function() {
-        $( this ).addClass( "highlight" );
-        selected_cuisines = [];
-        selected_cuisines.push( $(this).attr("value") );
-      });
-
-       $("#cuisine_summary").html("Random");
-
-      $(".cat_btn").addClass("highlight");
-
-      goToStepTwo()
-    });
-
-    $("#readytoeat").click(function() {
-
-      goToStepTwo()
-    });
+    
 
 
     settings = {
