@@ -527,7 +527,7 @@ jQuery('.tip_total').keyup(function () {
 
          $.ajax({
             type: "POST", // use method specified in form attributes
-            url: '<%= orders_path %>', // use action specified in form attributes (servlet)
+            url: '<%= menus_path %>', // use action specified in form attributes (servlet)
             data: { cuisines: selected_cuisines, firstname : firstname, lastname : lastname, street : street, zip : zip, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
             success: function(data) {
 
