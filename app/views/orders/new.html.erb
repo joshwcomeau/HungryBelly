@@ -275,13 +275,13 @@
   <h2 style="margin-top: 50px; text-align: center; font-size: 5rem; color: #a1cf64;" class="final_success">Success!</h2>
   <p style="width: 50%; margin: 0 auto; text-align: center; font-size: 1.5rem; margin-top: 20px;">Your food will arrive shortly. Hope you get something good!<br><br><span style="font-weight: 400; font-size: 0.8em;">Estimated Delivery Time:</span></p>
 
-  <div class="custom_container">
+  <div class="custom_container" style="display: none;">
     <div id="countdown">
-        <span id="hours"></span>
+        <span id="hours">0</span>
         <span class="dot">:</span>
-        <span id="minutes"></span>
+        <span id="minutes">44</span>
         <span class="dot">:</span>
-        <span id="seconds"></span>
+        <span id="seconds">59</span>
     </div>
 </div>
 
@@ -290,13 +290,6 @@
   </div>
 
 </div>
-
-
-<script>
-
-
-
-</script>
 
 <script>
 
@@ -349,7 +342,12 @@
       $("#pbar").css({width: '100%'})
       $(".step4").animate({
         right: 0
-      }, 1000);
+      }, 1000, function() {
+        startTimer();
+        $(".custom_container").fadeIn(500);
+        
+      });
+
     })
 
     $(".cheat").click(function() {
@@ -594,97 +592,41 @@
 
         });
 
-        /*
+    function startTimer() {
 
-rid:        @restaurant["restaurant_id"],
-     em:         "test@test.com",
-     tray:       @tray,
-     tip:        '5.05',
-     first_name: "Joshua",
-     last_name:  "Tester",
-     phone:      "6478967502",
-     zip:        zip,
-     addr:       addr,
-     city:       city,
-     state:      state,
-     card_name:        "Joshua Tester",
-     card_number:      '4111111111111111',
-     card_cvc:         '123',
-     card_expiry:      '02/2016',
-     card_bill_addr:   addr,
-     card_bill_addr2:  "",
-     card_bill_city:   city,
-     card_bill_state:  state,
-     card_bill_zip:    zip,
-     card_bill_phone:  "6478967502",
-     delivery_date:    "ASAP"
-        */
+      var end = new Date();
+      end.setMinutes(end.getMinutes() + 45);
 
 
-        // $('.ccsubmit').click(function(){
+      var _second = 1000;
+      var _minute = _second * 60;
+      var _hour = _minute * 60;
+      var _day = _hour *24
+      var timer;
 
+      function showRemaining()
+      {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0 ) {
+           // handle expiry here..
+           clearInterval( timer ); // stop the timer from continuing ..
+           alert('Expired'); // alert a message that the timer has expired..
 
-        //         var name = $('.name').val();
+           return; // break out of the function so that we do nowt update the counters with negative values..
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor( (distance % _day ) / _hour );
+        var minutes = Math.floor( (distance % _hour) / _minute );
+        var seconds = Math.floor( (distance % _minute) / _second );
 
-        //         var street = $('.street').val();
+        $("#hours").html(hours);
+        $("#minutes").html(minutes);
+        $("#seconds").html(seconds);
+      }
 
-        //         var zip = $('.zip').val();
-
-        //         var phone = $('.phone').val();
-        //   var lower = $('.budgetslider').val();
-        //   var upper = parseInt(sliderval) + 5;
-
-        //   var servings = $('#slider').val();
-
-        //      $.ajax({
-        //         type: "POST", // use method specified in form attributes
-        //         url: '?page_id=1116', // use action specified in form attributes (servlet)
-        //         data: { name : name, street : street, zip : zip, phone : phone, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
-        //         success: function(data) {
-
-        //           var result = jQuery.parseJSON(data);
-        //           // result['status']
-
-
-        //         }
-        //     });
-
-
-        // });
-
-
-var end = new Date();
-end.setMinutes(end.getMinutes() + 45);
-
-
-var _second = 1000;
-var _minute = _second * 60;
-var _hour = _minute * 60;
-var _day = _hour *24
-var timer;
-
-function showRemaining()
-{
-    var now = new Date();
-    var distance = end - now;
-    if (distance < 0 ) {
-       // handle expiry here..
-       clearInterval( timer ); // stop the timer from continuing ..
-       alert('Expired'); // alert a message that the timer has expired..
-
-       return; // break out of the function so that we do nowt update the counters with negative values..
+      timer = setInterval(showRemaining, 1000);
     }
-    var days = Math.floor(distance / _day);
-    var hours = Math.floor( (distance % _day ) / _hour );
-    var minutes = Math.floor( (distance % _hour) / _minute );
-    var seconds = Math.floor( (distance % _minute) / _second );
-
-    $("#hours").html(hours);
-    $("#minutes").html(minutes);
-    $("#seconds").html(seconds);
-}
-
-timer = setInterval(showRemaining, 1000);
 
 
     });
