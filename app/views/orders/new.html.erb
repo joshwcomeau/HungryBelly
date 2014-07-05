@@ -285,6 +285,18 @@
 <script>
 
   $(document).ready(function(){
+
+    ////// 'Global' variables. Used by one or more AJAX calls.
+
+    // IMPORTANT. Our data object that holds the JSON response with our order.
+    // Format: An array of objects, 1 object for each menu item.
+    var 
+    built_order, built_restaurant, built_tray, built_user,
+    firstname, lastname, street, zip;
+
+
+    ////// End
+
     $('.tip_total').keyup(function () {
       this.value = this.value.replace(/[^0-9\.]/g,'');
     });
@@ -346,17 +358,6 @@
     });
 
 
-    $(".take_money").click(function() {
-      $("#pbar").css({width: '100%'})
-      $(".step4").animate({
-        right: 0
-      }, 1000, function() {
-        startTimer();
-        $(".custom_container").fadeIn(500);
-        
-      });
-
-    })
 
     $(".cheat").click(function() {
       $(".menu_items").fadeIn(500);
@@ -397,192 +398,253 @@
 
 
     settings = {
-        //Model Popup
-        objModalPopupBtn: ".take_money",
-        objModalCloseBtn: ".overlay, .closeBtn",
-        objModalDataAttr: "data-popup"
+      //Model Popup
+      objModalPopupBtn: ".take_money",
+      objModalCloseBtn: ".overlay, .closeBtn",
+      objModalDataAttr: "data-popup"
     }
-      $(settings.objModalPopupBtn).bind("click", function () {
-            if ($(this).attr(settings.objModalDataAttr)) {
+    $(settings.objModalPopupBtn).bind("click", function () {
+      if ($(this).attr(settings.objModalDataAttr)) {
 
-                var strDataPopupName = $(this).attr(settings.objModalDataAttr);
+        var strDataPopupName = $(this).attr(settings.objModalDataAttr);
+
+        //Fade In Modal Pop Up
+        $(".overlay, #" + strDataPopupName).fadeIn();
+
+      }
+    });
+
+    //On clicking the modal background
+    $(settings.objModalCloseBtn).bind("click", function () {
+        $(".modal").fadeOut();
+    });
 
 
-                //Fade In Modal Pop Up
-                $(".overlay, #" + strDataPopupName).fadeIn();
+    var slider = $('.budgetslider'),
+    input = $('#input-with-keypress');
 
-            }
-        });
+    // Listen to keydown events on the input field.
+    input.keydown(function( e ) {
 
-        //On clicking the modal background
-        $(settings.objModalCloseBtn).bind("click", function () {
-            $(".modal").fadeOut();
-        });
+      // Convert the string to a number.
+      var value = Number( slider.val() );
 
+      // 38 is key up,
+      // 40 is key down.
+      switch ( e.which ) {
+        case 38: slider.val( value + 1 );
+          break;
+        case 40: slider.val( value - 1 );
+          break;
+      }
+    });
 
-        var slider = $('.budgetslider'),
-        input = $('#input-with-keypress');
+    slider.noUiSlider({
+      start: 0,
+      step:5,
+      connect: "lower",
+      range: {
+        'min': 15,
+        'max': 40
+      }
+    });
 
-        // Listen to keydown events on the input field.
-        input.keydown(function( e ) {
+    $("#slider").noUiSlider({
+      start: 1,
+      step:1,
+      connect: "lower",
+      range: {
+        'min': 1,
+        'max': 10
+      }
 
-          // Convert the string to a number.
-          var value = Number( slider.val() );
+    });
 
-          // 38 is key up,
-          // 40 is key down.
-          switch ( e.which ) {
-            case 38: slider.val( value + 1 );
-              break;
-            case 40: slider.val( value - 1 );
-              break;
+    $('#slider').on({
+      slide: function(){
+        $("#people").html('');
+          var slidervalz = $('#slider').val();
+          slidervalz = parseInt(slidervalz);
+          for ( var i = 0; i < slidervalz; i++ ) {
+          // Logs "try 0", "try 1", ..., "try 4".
+            $("#people").append('<i class="fa fa-user"></i>');
           }
-        });
+          if (servings == 1){
+             var servings = slidervalz + ' Serving';
 
-        slider.noUiSlider({
-          start: 0,
-          step:5,
-          connect: "lower",
-          range: {
-            'min': 15,
-            'max': 40
-          }
-        });
-
-        $("#slider").noUiSlider({
-          start: 1,
-          step:1,
-          connect: "lower",
-          range: {
-            'min': 1,
-            'max': 10
-          }
-
-        });
-
-        $('#slider').on({
-          slide: function(){
-            $("#people").html('');
-              var slidervalz = $('#slider').val();
-              slidervalz = parseInt(slidervalz);
-              for ( var i = 0; i < slidervalz; i++ ) {
-              // Logs "try 0", "try 1", ..., "try 4".
-                $("#people").append('<i class="fa fa-user"></i>');
-              }
-              if (servings == 1){
-                 var servings = slidervalz + ' Serving';
-
-              }else {
-                 var servings = slidervalz + ' Servings';
-
-              }
-              $('.servings, #servings_summary').html(servings);
-
-          },
-          set: function(){
-            var slidervalz = $('#slider').val();
-            // for ( var i = 0; i < slidervalz; i++ ) {
-            // // Logs "try 0", "try 1", ..., "try 4".
-            // // $("#people").append('<i class="fa fa-user"></i>');
-            // }
-          }
-        });
-
-
-
-        $('.budgetslider').on({
-          slide: function(){
-            var sliderval = $('.budgetslider').val();
-            sliderval = parseInt(sliderval);
-            var upper = parseInt(sliderval) + 5;
-            var sliderrange = '$' + sliderval + ' - ' + '$' + upper;
-
-            $('#input-with-keypress').val(sliderrange);
-          },
-          set: function(){
-            var sliderval = $('.budgetslider').val();
-            sliderval = parseInt(sliderval);
-            var upper = parseInt(sliderval) + 5;
-            var sliderrange = '$' + sliderval + ' - ' + '$' + upper;
-
-
-            $('#input-with-keypress').html(sliderrange);
+          }else {
+             var servings = slidervalz + ' Servings';
 
           }
-        });
+          $('.servings, #servings_summary').html(servings);
 
-        $('.feedme').click(function(){
-          $(".hider").fadeIn(500);
-
-            var firstname = $('.firstname').val();
-
-            var lastname = $('.lastname').val();
-
-            var street = $('.street').val();
-
-            var zip = $('.zip').val();
-
-            var lower = $('.budgetslider').val();
-            var upper = parseInt( $('.budgetslider').val() ) + 5;
-
-            var servings = $('#slider').val();
-
-         $.ajax({
-            type: "POST", // use method specified in form attributes
-            url: '<%= menus_path %>', // use action specified in form attributes (servlet)
-            data: { cuisines: selected_cuisines, firstname : firstname, lastname : lastname, street : street, zip : zip, lower : lower, upper : upper, servings : servings }, // encodes set of form elements as string for submission
-            success: function(data) {
-
-              console.log(data["error_id"]);
-
-
-              if ( data["error_id"] != undefined ) {
-                // Not valid for this user. Show an apology page.
-                $("#apology_message").html(data["message"]);
-                $("#apologypage").fadeIn(1000);
-
-              } else {
-                $("#pbar").css({width: '75%'});
-                $(".hider").fadeOut(500);
-
-                $(".step3").animate({
-                  right: 0
-                }, 1000);
-
-               
-
-
-                var subtotal = 0;
-
-                _.each(data, function(item) {
-                  $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
+      },
+      set: function(){
+        var slidervalz = $('#slider').val();
+        // for ( var i = 0; i < slidervalz; i++ ) {
+        // // Logs "try 0", "try 1", ..., "try 4".
+        // // $("#people").append('<i class="fa fa-user"></i>');
+        // }
+      }
+    });
 
 
 
-                  subtotal += parseFloat(item["price"]);
+    $('.budgetslider').on({
+      slide: function(){
+        var sliderval = $('.budgetslider').val();
+        sliderval = parseInt(sliderval);
+        var upper = parseInt(sliderval) + 5;
+        var sliderrange = '$' + sliderval + ' - ' + '$' + upper;
 
-                });
-
-
-                var price_string = subtotal.toString().substr(0,5)
-
-                $("#price_summary").html(price_string);
-                $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
-                $("#total_summary").html( (subtotal * 1.15).toFixed(2) );                  
-              }
-
-              
-
-              // $('.addressgiven').html(street);
-              // $('.servingschosen').html(servings);
-              // $('.menu_selection').html();
+        $('#input-with-keypress').val(sliderrange);
+      },
+      set: function(){
+        var sliderval = $('.budgetslider').val();
+        sliderval = parseInt(sliderval);
+        var upper = parseInt(sliderval) + 5;
+        var sliderrange = '$' + sliderval + ' - ' + '$' + upper;
 
 
-            }
-          });
+        $('#input-with-keypress').html(sliderrange);
+
+      }
+    });
+
+    // Use the API to create an order
+    $('.feedme').click(function(){
+      $(".hider").fadeIn(500);
+
+      // Update our 'global' variables with our inputs.
+      firstname = $('.firstname').val();
+      lastname = $('.lastname').val();
+      street = $('.street').val();
+      zip = $('.zip').val();
+
+      var lower = $('.budgetslider').val();
+      var upper = parseInt( $('.budgetslider').val() ) + 5;
+
+      var servings = $('#slider').val();
+
+      $.ajax({
+        type: "POST", // use method specified in form attributes
+        url: '<%= menus_url %>', // use action specified in form attributes (servlet)
+        data: { 
+          cuisines: selected_cuisines, firstname: firstname, lastname: lastname, 
+          street: street, zip: zip, lower: lower, upper: upper, servings: servings 
+        }, 
+        success: function(data) {
+
+          // Are we returning a set of meal items, or an error message?
+          
+          // Error message. :(
+          if ( data["error_id"] != undefined ) {
+            // Not valid for this user. Show an apology page.
+            $("#apology_message").html(data["message"]);
+            $("#apologypage").fadeIn(1000);
+
+          // Meal items! :D
+          } else {
+
+            built_order =       data['order'];
+            built_restaurant =  data['restaurant'];
+            built_tray =        data['tray'];
+            built_user =        data['user'];
 
 
-        });
+
+            $("#pbar").css({width: '75%'});
+            $(".hider").fadeOut(500);
+
+            $(".step3").animate({
+              right: 0
+            }, 1000);
+
+           
+
+
+            var subtotal = 0;
+
+            _.each(built_order, function(item) {
+              $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
+
+
+
+              subtotal += parseFloat(item["price"]);
+
+            });
+
+
+            var price_string = subtotal.toString().substr(0,5)
+
+            $("#price_summary").html(price_string);
+            $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
+            $("#total_summary").html( (subtotal * 1.15).toFixed(2) );                  
+          
+          } // Close 'else' that catches non-error json
+        }   // Close ajax success callback
+      });   // Close &.ajax
+    });     // Close $(".feedme").click
+
+
+    // Function that submits the already-built order to the restaurant.
+    $(".take_money").click(function() {
+
+      // $(".hider").fadeIn(500);
+      
+      // First, prepare all relevant data.
+      var 
+      email = 'joshwcomeau@gmail.com',
+      phone = '6478967502';
+
+
+      var 
+      order = {
+        rid:          built_restaurant["id"],
+        em:           email,
+        tray:         built_tray,
+        tip:          $("#tip_summary").val(),
+        first_name:   firstname,
+        last_name:    lastname,
+        phone:        phone,
+        zip:          zip,
+        addr:         street,
+        addr2:        "apartment 2",
+        city:         built_user["city"],
+        state:        built_user["state"],
+
+        card_name:          "Example User",
+        card_number:        '4111111111111111',
+        card_cvc:           '123',
+        card_expiry:        '02/2016',
+        card_bill_addr:     '1 Main St',
+        card_bill_city:     'College Station',
+        card_bill_state:    'TX',
+        card_bill_zip:      '77840',
+        card_bill_phone:    '2345678901',
+
+        delivery_date:      'ASAP'
+
+      };
+
+      $.post("<%= place_order_url %>", { args: order }, function(data) {
+        console.log(data);
+      });
+
+      $("#pbar").css({width: '100%'})
+      $(".step4").animate({
+        right: 0
+      }, 1000, function() {
+        startTimer();
+        $(".custom_container").fadeIn(500);
+        
+      });
+
+    })
+
+
+
+
 
     function startTimer() {
 

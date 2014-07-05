@@ -1,8 +1,11 @@
 class MenusController < ApplicationController
   require 'ordrin'
 
-  before_action :setup_api, only: [ :create ]
+  before_action :setup_api, only: [ :create, :place_order ]
 
+
+  # Our master method for creating an order. finds a restaurant, prepares a meal.
+  # Returns JSON of either all the order details, or an error message.
   def create
 
     # Build Address object.
@@ -54,9 +57,28 @@ class MenusController < ApplicationController
           @restaurant = find_restaurant(@valid_restaurants)
 
           @order = build_order(@restaurant["menu"], budget_low, budget_high, servings)
+          
           if @order != :no_possibilities
+
+            
+
+            @response = {
+              order:      @order,
+              tray:       build_tray(@order),
+              user:       {
+                city:  city,
+                state: state
+              },
+              restaurant: {
+                name:       @restaurant["name"],
+                id:         @restaurant["restaurant_id"],
+                phone:      @restaurant["cs_contact_phone"]
+              }
+            }
             break
           end
+
+
         end
 
         if @order == :no_possibilities
@@ -68,21 +90,26 @@ class MenusController < ApplicationController
       end
     end
 
+
+
     if @error
-      render :json => @error
+      render json: @error
     else
-      render :json => @order
+      render json: @response
     end
-    
-
-   
-
-
-    
-
-    # render :json => order_args
 
   end
+
+  # Once our order is created, this method places the order with the restaurant.
+  def place_order
+
+    args = params[:args]
+
+    @response = @api.order_guest(args)
+    render json: @response
+  end
+
+
 
   def build_order(restaurant, budget_low, budget_high, servings)
     possibilities = recursive_menu_gen(restaurant, [], budget_low, budget_high)
@@ -98,7 +125,7 @@ class MenusController < ApplicationController
     orders.each do |o|
       tray << "#{o[:id]}/1"
     end
-    tray.join(",+")
+    tray.join("+")
   end
 
   def recursive_menu_gen(r_object, keepers, budget_low, budget_high)
