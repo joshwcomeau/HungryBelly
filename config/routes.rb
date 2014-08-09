@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   resources :menus
   resources :api_tests
 
+  root 'navigation#index'
+
   post 'place_order' => 'menus#place_order', as: :place_order
 
-  root 'orders#new'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

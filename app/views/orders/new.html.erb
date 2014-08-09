@@ -590,7 +590,7 @@
     // Function that submits the already-built order to the restaurant.
     $(".take_money").click(function() {
 
-      // $(".hider").fadeIn(500);
+      $(".hider").fadeIn(500);
       
       // First, prepare all relevant data.
       var 
@@ -628,17 +628,18 @@
       };
 
       $.post("<%= place_order_url %>", { args: order }, function(data) {
-        console.log(data);
+        $(".hider").fadeOut(500);
+        $("#pbar").css({width: '100%'})
+        $(".step4").animate({
+          right: 0
+        }, 1000, function() {
+          startTimer();
+          $(".custom_container").fadeIn(500);
+          
+        });
       });
 
-      $("#pbar").css({width: '100%'})
-      $(".step4").animate({
-        right: 0
-      }, 1000, function() {
-        startTimer();
-        $(".custom_container").fadeIn(500);
-        
-      });
+      
 
     })
 
