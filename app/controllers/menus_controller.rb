@@ -105,6 +105,8 @@ class MenusController < ApplicationController
 
     args = params[:args]
 
+    binding.pry
+
     @response = @api.order_guest(args)
     render json: @response
   end

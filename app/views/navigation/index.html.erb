@@ -1,1 +1,83 @@
-<h1>HI!</h1>
+<div class="splash_wrapper">
+
+  <header>
+    <h1 class="splash_logo">HungryBelly</h1>
+    <nav class="splash_nav">
+      <ul>
+        <li><%= link_to "App", new_order_path, class: 'splash_nav_link' %></li>
+        <li><%= link_to "Team", '#team', class: 'splash_nav_link' %></li>
+        <li><%= link_to "Contact", '#contact', class: 'splash_nav_link' %></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="splash_main">
+    <div class="splash_main_row1">
+      <%= image_tag "splash_main_img.png" %>
+    </div> 
+    <div class="splash_main_row2">
+      <div class="splash_main_left">
+        <%= image_tag "asset2.png" %>
+      </div>
+
+      <div class="splash_main_right">
+        <h3>Hungry Belly</h3>
+
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+        </p>
+      </div>
+    </div>
+  </div>  
+
+  <a name="team"></a>
+  <div class="splash_team">
+    <div class="splash_team_label">The Team</div>
+    
+    <div class="team_member left_member">
+      <%= image_tag 'logo_outline_black.png' %>
+      <h4 class="team_member_name">Josh C.</h4>
+      <div class="team_member_underline"></div>
+      <p class="team_member_role">Co-Founder<br>Back-End Developer</p>
+    </div>
+    <div class="team_member right_member">
+      <%= image_tag 'logo_outline_black.png' %>
+      <h4 class="team_member_name">Sameer N.</h4>
+      <div class="team_member_underline"></div>
+      <p class="team_member_role">Co-Founder<br>Back-End Developer</p>
+    </div>
+
+    <div class="team_member center_member">
+      <%= image_tag 'logo_outline_black.png' %>
+      <h4 class="team_member_name">Ramis H.</h4>
+      <div class="team_member_underline"></div>
+      <p class="team_member_role">Co-Founder<br>Designer</p>
+    </div>
+
+    <div class="team_member left_member">
+      <%= image_tag 'logo_outline_black.png' %>
+      <h4 class="team_member_name">Jose P.</h4>
+      <div class="team_member_underline"></div>
+      <p class="team_member_role">Co-Founder<br>Front-End Developer</p>
+    </div>
+    <div class="team_member right_member">
+      <%= image_tag 'logo_outline_black.png' %>
+      <h4 class="team_member_name">Ellen L.</h4>
+      <div class="team_member_underline"></div>
+      <p class="team_member_role">Co-Founder<br>Front-End Developer</p>
+    </div>
+  </div>
+
+  <footer class="splash_footer">
+    <a name="contact"></a>
+    <div class="splash_footer_left">
+      <p>
+        If you want to talk about food potential  partnership or just need someone to talk to you can reach us at:
+      </p>
+    </div>
+
+    <div class="splash_footer_right">
+      hellooo@hungrybelly.me
+    </div>
+  </footer>
+</div>

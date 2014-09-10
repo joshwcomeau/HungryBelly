@@ -1,3 +1,160 @@
-// Place all the styles related to the navigation controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.splash_wrapper {
+  font-family: 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+  width: 658px;
+  margin: 0 auto;
+}
+
+.splash_wrapper.header {
+  height: 6rem;
+  line-height: 6rem;
+}
+.splash_logo {
+  float: left;
+  line-height: 6rem;
+  font-size: 1.5rem;
+}
+.splash_nav {
+  float: right;
+}
+
+.splash_nav li {
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 6rem;
+  font-size: 0.9rem;
+}
+
+.splash_nav_link {
+  color: #000;
+  text-decoration: none;
+}
+.splash_nav_link:hover {
+  color: #EE2E23;
+}
+
+.splash_main_row2 {
+  margin-top: 4rem;
+  position: relative;
+  overflow: auto;
+}
+
+.splash_main_left_outside {
+  float: left;
+  width: 10%;
+  margin-left: -10%;
+  background: #EE3E23;
+}
+.splash_main_left {
+  float: left;
+  width: 35%;
+  background: #EE3E23;
+  text-align: center;
+  padding: 2rem;
+}
+
+.splash_main_right {
+  float: right;
+  width: 65%;
+  padding-left: 2rem;
+}
+
+.splash_main_right h3 {
+  font-size: 1.3rem;
+  color: #EE3E23;
+}
+
+.splash_main_right p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+}
+
+.splash_team {
+  position: relative;
+  margin-top: 4rem;
+  background: #f3f3f3;
+  padding: 2rem 0;
+}
+
+.splash_team_label {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  padding: 0.3rem 1rem;
+  color: #FFF6F5;
+  background: #22B573;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.team_member {
+  position: relative;
+  width: 29%;
+  text-align: center;
+  padding: 1.25rem 1rem;
+}
+
+.left_member {
+  margin-left: 15%;
+  margin-right: 5%;
+  display: inline-block;
+}
+
+.right_member {
+  margin-left: 5%;
+  margin-right: 15%;
+  display: inline-block;
+}
+
+.center_member {
+  margin: 0 auto;
+}
+
+.team_member img {
+  margin-bottom: 0.5rem;
+}
+
+.team_member_name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.team_member_underline {
+  width: 25%;
+  height: 3px;
+  background: #EE3E23;
+  margin: 4px auto;
+}
+
+.team_member_role {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  line-height: 1.2em;
+}
+
+
+.splash_footer {
+  position: relative;
+  margin-top: 2rem;
+  width: 130%;
+  margin-left: -15%;
+}
+
+.splash_footer_left {
+  width: 55%;
+  float: left;
+  background: #22B573;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 1rem;
+  color: #FFF;
+}
+
+.splash_footer_right {
+  
+  float: right;
+  text-align: right;
+  color: #F15A24;
+  font-size: 2rem;
+  line-height: 4.2rem;
+}
