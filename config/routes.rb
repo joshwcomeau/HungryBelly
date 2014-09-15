@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   # root 'orders#new'
   
-  # Splash page. Uncomment when such a page exists.
-  root 'navigation#index'
+  root 'navigation#coming_soon'
   
 end
