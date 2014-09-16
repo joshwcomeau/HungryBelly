@@ -22,28 +22,3 @@
     <div class="line2">You'll be the first to know when we launch. Thanks for the support.</div>
   </div>
 </div>
-
-<script>
-$(document).ready(function() {
-  $(".main_content").animate({
-    top: '10%'
-  }, 1000);
-
-  $(".back_splash").animate({
-    opacity: 1
-  }, 1000);
-});
-$("form").on("ajax:complete", function(e, xhr, success) {
-  data = JSON.parse(xhr.responseText);
-
-  if ( data['success'] == false ) {
-    alert("Oh no! Is that a valid email address?");
-  } else {
-    $(this).parent().slideUp(500, function() {
-      $(".success_msg").slideDown(500);
-    });
-
-  }
-
-});
-</script>
