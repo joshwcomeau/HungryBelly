@@ -1,5 +1,49 @@
 <div class="back_splash"></div>
+<div class="main_logo">HungryBelly</div>
 <div class="main_content">
   <div class="cs_logo"><%= render partial: 'logo.svg' %></div>
-  <h2 class="cs_main_header">It's Coming.</h2>
+  <h2 class="cs_main_header">Something's Coming.</h2>
+  <h3>Trust me, it'll be worth the wait.</h3>
+  <div class="line"></div>
+
+  <p>Start preparing your stomach; HungryBelly is almost here. The <a href="http://en.wikipedia.org/wiki/Kinder_Surprise" target="_blank">Kinder Surprise</a> of food delivery, we use crazy-smart algorithms and computer stuffs to figure out what you're getting for dinner, ensuring a delicious meal without the hassle of making up your mind.</p>
+
+  <h4 class="tagline">You don't know what you're getting<br>until it shows up at your door.</h4>
+  
+  <div class="email_form">
+    <p>Sign up for email notifications:</p>
+    <%= form_for @email, remote: true do |f| %>
+      <%= f.text_field :email, placeholder: "name@domain.com" %><%= f.submit "GO" %>
+    <% end %>
+    <p class="tiny">We're nice! We promise not to spam you.</p>
+  </div>
+  <div class="success_msg">
+    <div class="line1">Woot!</div>
+    <div class="line2">You'll be the first to know when we launch. Thanks for the support.</div>
+  </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  $(".main_content").animate({
+    top: '10%'
+  }, 1000);
+
+  $(".back_splash").animate({
+    opacity: 1
+  }, 1000);
+});
+$("form").on("ajax:complete", function(e, xhr, success) {
+  data = JSON.parse(xhr.responseText);
+
+  if ( data['success'] == false ) {
+    alert("Oh no! Is that a valid email address?");
+  } else {
+    $(this).parent().slideUp(500, function() {
+      $(".success_msg").slideDown(500);
+    });
+
+  }
+
+});
+</script>

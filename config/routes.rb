@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   resources :menus
   resources :api_tests
 
+  resources :contacts, only: [:create]
 
 
   post 'place_order' => 'menus#place_order', as: :place_order
 
   # root 'orders#new'
   
-  root 'navigation#index'
+  root 'navigation#coming_soon'
   
 end

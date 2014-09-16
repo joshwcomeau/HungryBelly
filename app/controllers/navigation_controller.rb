@@ -5,6 +5,6 @@ class NavigationController < ApplicationController
   end
 
   def coming_soon
-
+    @email = Contact.new
   end
 end
