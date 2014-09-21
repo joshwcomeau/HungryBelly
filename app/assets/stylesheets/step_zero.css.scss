@@ -1,42 +1,42 @@
-// .step0 {
-//   position: absolute;
-//   width: 100%;
-//   z-index: 300; 
-//   background-color: #3e3e3f;
-//   height: 100%;
-//   padding-top: 0px;
+.step0 {
+  position: absolute;
+  width: 100%;
+  z-index: 300; 
+  background-color: #3e3e3f;
+  height: 100%;
+  padding-top: 0px;
 
-//   & > div {
-//     position: absolute; 
-//     left: 0; right: 0; top: 0; bottom: 0; 
-//     margin: auto; 
-//     color: #FFF; 
-//     height: 70%;
-//   }
+  & > div {
+    position: absolute; 
+    left: 0; right: 0; top: 0; bottom: 0; 
+    margin: auto; 
+    color: #FFF; 
+    height: 70%;
+  }
 
 
-//   strong {
-//     color: #FF3E30;
-//   }
-// }
-// .landing_title {
-//   font-size: 65px;
-//   text-align: center;
-//   color: #fff;
-//   margin: auto;
-// }
+  strong {
+    color: #FF3E30;
+  }
+}
+.landing_title {
+  font-size: 65px;
+  text-align: center;
+  color: #fff;
+  margin: auto;
+}
 
-// .logo{
-//  text-align: center;
-//  margin-right: auto;
-//  margin-left: auto;
-// }
+.logo{
+ text-align: center;
+ margin-right: auto;
+ margin-left: auto;
+}
 
-// .logo img {
-//   width: 15%;
-//   margin-top: 75px;
-// }
+.logo img {
+  width: 15%;
+  margin-top: 75px;
+}
 
-// .show_first_step {
-//   cursor: pointer;
-// }
+.show_first_step {
+  cursor: pointer;
+}

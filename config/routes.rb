@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 
   # root 'orders#new'
   
-  root 'navigation#coming_soon'
+  root 'orders#new'
   
 end
