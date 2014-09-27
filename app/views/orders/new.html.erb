@@ -290,7 +290,7 @@
 
     // IMPORTANT. Our data object that holds the JSON response with our order.
     // Format: An array of objects, 1 object for each menu item.
-    var 
+    var
     built_order, built_restaurant, built_tray, built_user,
     firstname, lastname, street, zip;
 
@@ -394,7 +394,7 @@
       $(this).attr("src", normal_logo );
     });
 
-    
+
 
 
     settings = {
@@ -529,14 +529,14 @@
       $.ajax({
         type: "POST", // use method specified in form attributes
         url: '<%= menus_url %>', // use action specified in form attributes (servlet)
-        data: { 
-          cuisines: selected_cuisines, firstname: firstname, lastname: lastname, 
-          street: street, zip: zip, lower: lower, upper: upper, servings: servings 
-        }, 
+        data: {
+          cuisines: selected_cuisines, firstname: firstname, lastname: lastname,
+          street: street, zip: zip, lower: lower, upper: upper, servings: servings
+        },
         success: function(data) {
 
           // Are we returning a set of meal items, or an error message?
-          
+
           // Error message. :(
           if ( data["error_id"] != undefined ) {
             // Not valid for this user. Show an apology page.
@@ -560,7 +560,7 @@
               right: 0
             }, 1000);
 
-           
+
 
 
             var subtotal = 0;
@@ -579,8 +579,8 @@
 
             $("#price_summary").html(price_string);
             $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
-            $("#total_summary").html( (subtotal * 1.15).toFixed(2) );                  
-          
+            $("#total_summary").html( (subtotal * 1.15).toFixed(2) );
+
           } // Close 'else' that catches non-error json
         }   // Close ajax success callback
       });   // Close &.ajax
@@ -591,14 +591,14 @@
     $(".take_money").click(function() {
 
       $(".hider").fadeIn(500);
-      
+
       // First, prepare all relevant data.
-      var 
+      var
       email = 'joshwcomeau@gmail.com',
       phone = '6478967502';
 
 
-      var 
+      var
       order = {
         rid:          built_restaurant["id"],
         em:           email,
@@ -635,11 +635,11 @@
         }, 1000, function() {
           startTimer();
           $(".custom_container").fadeIn(500);
-          
+
         });
       });
 
-      
+
 
     })
 

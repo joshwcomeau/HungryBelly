@@ -1,3 +1,6 @@
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,user-scalable=no" />
+
+<div class="sampleuser_container">
 <div class="hider" style="display: none; position: absolute; z-index: 101; width: 100%; height: 100%; background: rgba(255,255,255,0.8);">
   <%= image_tag "logo.svg", class: 'spinning_loader' %>
 
@@ -50,7 +53,7 @@
 
 
 
-<div class="step2" style="position: absolute; top: 30px; width: 100%; height: 100%; right: -100%; background: #FFF; overflow-y: scroll;">
+<div class="step2" style="display: none; position: absolute; top: 30px; height: 100%; background: #FFF;">
 
   <div class="order_container" style="position: relative; width: 100%; padding-top: 100px; padding-bottom: 35px">
     <div class="order_details" style="padding: 0px 14px;">
@@ -75,23 +78,24 @@
   </div>
 
 
-  <div class="delivery_container" style="position: relative; width: 100%; padding-top: 40px; padding-bottom: 40px">
+  <div class="delivery_container" style="position: relative; width: 100%; padding: 40px 10px;">
     <div class="delivery_details">
     <h3 class="delivery_heading" style="padding-bottom: 10px">Delivery Address</h3>
       <form>
-        <input type="text" name="firstname" class="firstname" placeholder="First Name" value="James"><br>
-        <input type="text" name="lastname" class="lastname" placeholder="Last Name" value="Franco"><br>
-        <input type="text" name="street" class="street" placeholder="Street" value="123 Avenue Street"><br>
-        <input type="text" name="zip" class="zip" placeholder="Zip" value="M1G 1N5">
+        <input type="text" name="firstname" class="firstname" placeholder="First Name"><br>
+        <input type="text" name="lastname" class="lastname" placeholder="Last Name"><br>
+        <input type="text" name="street" class="street" placeholder="Street"><br>
+        <input type="text" name="zip" class="zip" placeholder="Postal Code"><br>
+        <input type="text" name="phone" class="phone" placeholder="Phone #">
       </form>
     </div>
   </div>
 
 
 
-  <div class="feed_me_container" style="position: relative; width: 100%; margin-top: -45px;">
+  <div class="feed_me_container" style="position: relative; width: 100%; margin-top: -45px; margin-bottom: 45px;">
 
-    <div id="red" class="modalButton button red text-blanco text-shadow-negra feedme" style="margin-bottom: 50px" data-popup="popupOne">Feed Me</div>
+    <div id="red" class="modalButton button red text-blanco text-shadow-negra feedme" style="margin-bottom: 90px" data-popup="popupOne">Feed Me</div>
   </div>
 
 
@@ -131,7 +135,7 @@
 
 
 
-<div class="step3" style="position: absolute; z-index: 100;top: 30px; width: 100%; height: 100%; right: -100%; background: #FFF;">
+<div class="step3" style="position: absolute; z-index: 100;top: 30px; width: 100%; height: 100%; right: -100%; background: #FFF; display: none">
   <div class="summary_container">
 
       <div class="summary_title">
@@ -220,7 +224,7 @@
   </div>
 </div>
 
-<div class="step4" style="background: #0078AB; position: absolute; z-index: 100; top: 30px; width: 100%; height: 100%; right: -100%; color: #FFF">
+<div class="step4" style="background: #0078AB; position: absolute; z-index: 100; top: 30px; width: 100%; height: 100%; right: -100%; color: #FFF; display: none;">
   <div class="cheat" style="position: absolute; right: 10px; bottom: 30px; font-size: 3rem; cursor: pointer;">Cheat!</div>
   <h2 style="margin-top: 50px; text-align: center; font-size: 5rem; color: #a1cf64;" class="final_success">Success!</h2>
   <p style="width: 50%; margin: 0 auto; text-align: center; font-size: 1.5rem; margin-top: 20px;">Your food will arrive shortly. Hope you get something good!<br><br><span style="font-weight: 400; font-size: 0.8em;">Estimated Delivery Time:</span></p>
@@ -239,6 +243,7 @@
 
   </div>
 
+</div>
 </div>
 
 <script>
@@ -294,6 +299,7 @@
     // BUTTON CLICKS TO GO TO NEXT PAGE
 
     $("#readytoeat").click(function() {
+
       if ( selected_cuisines.length > 0 ) {
         goToStepTwo()
       } else {
@@ -308,7 +314,6 @@
         selected_cuisines = [];
         selected_cuisines.push( $(this).attr("value") );
       });
-
        $("#cuisine_summary").html("Random");
 
       $(".cat_btn").addClass("highlight");
@@ -339,7 +344,7 @@
 
     function goToStepTwo() {
       $("#pbar").css({width: '50%'})
-        $(".step2").animate({
+        $(".step2").css("display", "initial").animate({
           right: 0
         }, 1000);
     }
