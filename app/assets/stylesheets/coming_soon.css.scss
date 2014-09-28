@@ -92,7 +92,7 @@
     }
 
     input[type='text'] {
-      width: 218px;
+      width: 200px;
       padding: 8px;
     }
     input[type='submit'] {
@@ -101,6 +101,9 @@
       background: #97cb0c;
       color: #FFF;
       text-shadow: 1px 1px 0px #61800e;
+      // Remove iOS styling
+      -webkit-appearance: none;
+      border-radius: 0;
     }
 
     .tiny {
