@@ -1,0 +1,656 @@
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,user-scalable=no" />
+
+<div class="sampleuser_container">
+<div class="hider" style="display: none; position: absolute; z-index: 101; width: 100%; height: 100%; background: rgba(255,255,255,0.8);">
+  <%= image_tag "logo.svg", class: 'spinning_loader' %>
+
+</div>
+
+<header class="top_header">
+  <div class="ui green active striped progress" id="top_progress">
+    <div class="bar" id="pbar" style="width: 1%; height: 100%;"></div>
+  </div>
+  <div class="logo_corner">
+    <%= image_tag 'logo.svg' %>
+  </div>
+</header>
+
+
+<div class="step1">
+  <div class="cuisine_container">
+    <div class="cuisines">
+
+      <h2 class="craving_header">What are you Craving?</h2>
+
+      <ul class="cuisine_btns">
+        <li>
+          <button class="cat_btn" value="Greek">Greek</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Chinese">Chinese</button>
+        </li>
+      </ul>
+    </div>
+
+
+  <div class="lets_eat">
+    <ul class="lets_eat_buttons">
+      <li>
+      <button class="eat_btn" id="readytoeat"> Lock In Selection </button>
+      </li>
+      <li>
+      <button class="eat_btn" id="idgas"> I'm Not Picky</button>
+      </li>
+    </ul>
+  </div>
+
+
+  </div>
+
+</div><!-- END OF STEP 1 -->
+
+
+
+
+
+<div class="step2" style="display: none; position: absolute; top: 30px; height: 100%; background: #FFF;">
+
+  <div class="order_container" style="position: relative; width: 100%; padding-top: 100px; padding-bottom: 35px">
+    <div class="order_details" style="padding: 0px 14px;">
+
+      <h3 style="font-size: 1.6rem; margin-bottom: 15px; text-align: center;">How Many Servings?</h3>
+
+    <div id="slider"></div>
+
+    <div id="people" style="text-align: center; margin-top: 10px; font-size: 2.6rem;">
+      <i class="fa fa-user"></i>
+    </div>
+
+      <h3 class="results servings" style="text-align: center; margin-top: 10px; font-size: 1.25rem;"> 1 Serving</h3>
+
+      <h3 style="font-size: 1.6rem; margin-bottom: 15px; margin-top: 50px; text-align: center;">What's your budget per serving?</h3>
+
+      <div class="budgetslider"></div>
+
+      <h3 class="budg results" id="input-with-keypress"  style="text-align: center; margin-top: 10px; font-size: 1.45rem;"> $15 - 20 </h3>
+
+    </div>
+  </div>
+
+
+  <div class="delivery_container" style="position: relative; width: 100%; padding: 40px 10px;">
+    <div class="delivery_details">
+    <h3 class="delivery_heading" style="padding-bottom: 10px">Delivery Address</h3>
+      <form>
+        <input type="text" name="firstname" class="firstname" placeholder="First Name"><br>
+        <input type="text" name="lastname" class="lastname" placeholder="Last Name"><br>
+        <input type="text" name="street" class="street" placeholder="Street"><br>
+        <input type="text" name="zip" class="zip" placeholder="Postal Code"><br>
+        <input type="text" name="phone" class="phone" placeholder="Phone #">
+      </form>
+    </div>
+  </div>
+
+
+
+  <div class="feed_me_container" style="position: relative; width: 100%; margin-top: -45px; margin-bottom: 45px;">
+
+    <div id="red" class="modalButton button red text-blanco text-shadow-negra feedme" style="margin-bottom: 90px" data-popup="popupOne">Feed Me</div>
+  </div>
+
+
+</div>
+
+
+
+  <section class="modal modalWindow" id="popupOne">
+    <section class="modalWrapper">
+      <h2>Check Out</h2>
+      <div class="billing_container">
+           <div class="billing_details">
+             <h3 class="billing_heading">Billing Information</h3>
+               <form>
+                <input type="text" pattern="[0-9]{13,16}" name="creditcard" placeholder="Credit Card"> <br>
+                <input id="month" type="text" name="month" placeholder="MM">
+                <input id="year" type="text" name="year" placeholder="YY">
+                <input id="security_code" type="text" name="securitycode" placeholder="111">
+
+                <hr>
+              <h3 class="billing_heading">Billing Address</h3>
+                <input type="text" name="street" placeholder="Street"><br>
+                <input type="text" name="zip" placeholder="Zip">
+                <input type="text" name="tel" placeholder="416-555-555">
+
+             </form>
+           </div>
+      </div>
+
+
+    </section>
+    <a class="closeBtn">CLOSE X</a>
+  </section>
+  <section class="modal overlay"></section>
+</div>
+
+
+
+
+<div class="step3" style="position: absolute; z-index: 100;top: 30px; width: 100%; height: 100%; right: -100%; background: #FFF; display: none">
+  <div class="summary_container">
+
+      <div class="summary_title">
+      Order Summary
+      </div>
+
+     <div class="summary_title_grp">
+
+      <table class="summary_table">
+        <tr>
+          <td class="summary_item_title">
+            cuisine
+          </td>
+        </tr>
+        <tr>
+          <td class="summary_item menu_selection">
+            <span id="cuisine_summary"></span>
+          </td>
+        </tr>
+      </table>
+
+        <table class="summary_table">
+        <tr>
+          <td class="summary_item_title">
+            servings
+          </td>
+        </tr>
+        <tr>
+          <td class="summary_item servingschosen">
+            <span id="servings_summary">1</span>
+          </td>
+        </tr>
+      </table>
+
+        <table class="summary_table">
+        <tr>
+          <td class="summary_item_title">
+            delivery address
+          </td>
+        </tr>
+        <tr>
+          <td class="summary_item addressgiven">
+            <span id="street_summary">1540 Broadway</span>, <span id="zip_summary">10036</span>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <div class="subtotal_container">
+
+    <div class="summary_title_grp">
+
+        <div class="subtotal_title">
+        subtotal
+        </div>
+
+        <div class="price_total">
+          $<span id="price_summary"></span>
+        </div>
+
+        <div class="tip_title">
+          tip: (default 15%)
+        </div>
+
+        <input class="tip_total" id="tip_summary">
+        </input>
+
+        <div class="total_title">
+          total
+        </div>
+
+        <div class="final_total">
+          $<span id="total_summary"></span>
+        </div>
+
+      </div>
+
+      <button class="take_money"> take my money </button>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="step4" style="background: #0078AB; position: absolute; z-index: 100; top: 30px; width: 100%; height: 100%; right: -100%; color: #FFF; display: none;">
+  <div class="cheat" style="position: absolute; right: 10px; bottom: 30px; font-size: 3rem; cursor: pointer;">Cheat!</div>
+  <h2 style="margin-top: 50px; text-align: center; font-size: 5rem; color: #a1cf64;" class="final_success">Success!</h2>
+  <p style="width: 50%; margin: 0 auto; text-align: center; font-size: 1.5rem; margin-top: 20px;">Your food will arrive shortly. Hope you get something good!<br><br><span style="font-weight: 400; font-size: 0.8em;">Estimated Delivery Time:</span></p>
+
+  <div class="custom_container" style="display: none;">
+    <div id="countdown">
+        <span id="hours">0</span>
+        <span class="dot">:</span>
+        <span id="minutes">44</span>
+        <span class="dot">:</span>
+        <span id="seconds">59</span>
+    </div>
+  </div>
+
+  <div class="menu_items">
+
+  </div>
+
+</div>
+</div>
+
+<script>
+
+  $(document).ready(function(){
+
+    ////// 'Global' variables. Used by one or more AJAX calls.
+
+    // IMPORTANT. Our data object that holds the JSON response with our order.
+    // Format: An array of objects, 1 object for each menu item.
+    var
+    built_order, built_restaurant, built_tray, built_user,
+    firstname, lastname, street, zip;
+
+
+    ////// End
+
+    $('.tip_total').keyup(function () {
+      this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
+
+    $(".tip_total").blur(function() {
+      $(this).val(Number($(this).val()).toFixed(2));
+      $("#total_summary").html(
+        (parseFloat($(this).val()) + parseFloat($("#price_summary").html())).toFixed(2)
+      );
+    });
+
+    var selected_cuisines = [];
+
+    $(".show_first_step").click(function() {
+
+      $(".step0").slideUp(1000, function() {
+        $("#pbar").css({width: '25%'})
+      });
+    });
+
+    $('.ui.checkbox')
+      .checkbox()
+    ;
+
+    $('.cat_btn').click(function(){
+      var selected_cuisines = categoryToggle(this);
+
+
+    });
+
+    $(".street, .zip").keyup(function() {
+      $("#street_summary").html( $(".street").val() );
+      $("#zip_summary").html( $(".zip").val() );
+    });
+
+    // BUTTON CLICKS TO GO TO NEXT PAGE
+
+    $("#readytoeat").click(function() {
+
+      if ( selected_cuisines.length > 0 ) {
+        goToStepTwo()
+      } else {
+        alert("Please select at least 1 cuisine, or click \"I'm Not Picky\"")
+      }
+    });
+
+    $("#idgas").click(function() {
+
+      $( ".cat_btn" ).each(function() {
+        $( this ).addClass( "highlight" );
+        selected_cuisines = [];
+        selected_cuisines.push( $(this).attr("value") );
+      });
+       $("#cuisine_summary").html("Random");
+
+      $(".cat_btn").addClass("highlight");
+
+      goToStepTwo()
+    });
+
+
+
+    $(".cheat").click(function() {
+      $(".menu_items").fadeIn(500);
+    })
+
+    function categoryToggle(cuisine) {
+      $(cuisine).toggleClass('highlight');
+      $("#cuisine_summary").html($(cuisine).html());
+      if ( $(cuisine).hasClass('highlight') )  {
+        selected_cuisines.push( $(cuisine).attr("value") );
+      } else {
+        var index = selected_cuisines.indexOf($(cuisine).html());
+        if (index > -1) {
+         selected_cuisines.splice(index, 1);
+        }
+      }
+
+      return selected_cuisines
+    }
+
+    function goToStepTwo() {
+      $("#pbar").css({width: '50%'})
+        $(".step2").css("display", "initial").animate({
+          right: 0
+        }, 1000);
+    }
+
+    var normal_logo = "<%= asset_path 'logo.svg' %>";
+    var squint_logo = "<%= asset_path 'logo_squint.svg' %>";
+
+    $(".first_landing_logo").mouseenter(function() {
+      $(this).attr("src", squint_logo );
+    }).mouseleave(function() {
+      $(this).attr("src", normal_logo );
+    });
+
+
+
+
+    settings = {
+      //Model Popup
+      objModalPopupBtn: ".take_money",
+      objModalCloseBtn: ".overlay, .closeBtn",
+      objModalDataAttr: "data-popup"
+    }
+    $(settings.objModalPopupBtn).bind("click", function () {
+      if ($(this).attr(settings.objModalDataAttr)) {
+
+        var strDataPopupName = $(this).attr(settings.objModalDataAttr);
+
+        //Fade In Modal Pop Up
+        $(".overlay, #" + strDataPopupName).fadeIn();
+
+      }
+    });
+
+    //On clicking the modal background
+    $(settings.objModalCloseBtn).bind("click", function () {
+        $(".modal").fadeOut();
+    });
+
+
+    var slider = $('.budgetslider'),
+    input = $('#input-with-keypress');
+
+    // Listen to keydown events on the input field.
+    input.keydown(function( e ) {
+
+      // Convert the string to a number.
+      var value = Number( slider.val() );
+
+      // 38 is key up,
+      // 40 is key down.
+      switch ( e.which ) {
+        case 38: slider.val( value + 1 );
+          break;
+        case 40: slider.val( value - 1 );
+          break;
+      }
+    });
+
+    slider.noUiSlider({
+      start: 0,
+      step:5,
+      connect: "lower",
+      range: {
+        'min': 15,
+        'max': 40
+      }
+    });
+
+    $("#slider").noUiSlider({
+      start: 1,
+      step:1,
+      connect: "lower",
+      range: {
+        'min': 1,
+        'max': 10
+      }
+
+    });
+
+    $('#slider').on({
+      slide: function(){
+        $("#people").html('');
+          var slidervalz = $('#slider').val();
+          slidervalz = parseInt(slidervalz);
+          for ( var i = 0; i < slidervalz; i++ ) {
+          // Logs "try 0", "try 1", ..., "try 4".
+            $("#people").append('<i class="fa fa-user"></i>');
+          }
+          if (servings == 1){
+             var servings = slidervalz + ' Serving';
+
+          }else {
+             var servings = slidervalz + ' Servings';
+
+          }
+          $('.servings, #servings_summary').html(servings);
+
+      },
+      set: function(){
+        var slidervalz = $('#slider').val();
+        // for ( var i = 0; i < slidervalz; i++ ) {
+        // // Logs "try 0", "try 1", ..., "try 4".
+        // // $("#people").append('<i class="fa fa-user"></i>');
+        // }
+      }
+    });
+
+
+
+    $('.budgetslider').on({
+      slide: function(){
+        var sliderval = $('.budgetslider').val();
+        sliderval = parseInt(sliderval);
+        var upper = parseInt(sliderval) + 5;
+        var sliderrange = '$' + sliderval + ' - ' + '$' + upper;
+
+        $('#input-with-keypress').val(sliderrange);
+      },
+      set: function(){
+        var sliderval = $('.budgetslider').val();
+        sliderval = parseInt(sliderval);
+        var upper = parseInt(sliderval) + 5;
+        var sliderrange = '$' + sliderval + ' - ' + '$' + upper;
+
+
+        $('#input-with-keypress').html(sliderrange);
+
+      }
+    });
+
+    // Use the API to create an order
+    $('.feedme').click(function(){
+      $(".hider").fadeIn(500);
+
+      // Update our 'global' variables with our inputs.
+      firstname = $('.firstname').val();
+      lastname = $('.lastname').val();
+      street = $('.street').val();
+      zip = $('.zip').val();
+
+      var lower = $('.budgetslider').val();
+      var upper = parseInt( $('.budgetslider').val() ) + 5;
+
+      var servings = $('#slider').val();
+
+      $.ajax({
+        type: "POST", // use method specified in form attributes
+        url: '<%= menus_url %>', // use action specified in form attributes (servlet)
+        data: {
+          cuisines: selected_cuisines, firstname: firstname, lastname: lastname,
+          street: street, zip: zip, lower: lower, upper: upper, servings: servings
+        },
+        success: function(data) {
+
+          // Are we returning a set of meal items, or an error message?
+
+          // Error message. :(
+          if ( data["error_id"] != undefined ) {
+            // Not valid for this user. Show an apology page.
+            $("#apology_message").html(data["message"]);
+            $("#apologypage").fadeIn(1000);
+
+          // Meal items! :D
+          } else {
+
+            built_order =       data['order'];
+            built_restaurant =  data['restaurant'];
+            built_tray =        data['tray'];
+            built_user =        data['user'];
+
+
+
+            $("#pbar").css({width: '75%'});
+            $(".hider").fadeOut(500);
+
+            $(".step3").animate({
+              right: 0
+            }, 1000);
+
+
+
+
+            var subtotal = 0;
+
+            _.each(built_order, function(item) {
+              $(".menu_items").append("<div class='menu_item'><strong>"+item["name"]+"</strong><p class='mi_descrip'>"+item["descrip"]+"</p><p class='mi_price'>"+item["price"]+"</p></div>");
+
+
+
+              subtotal += parseFloat(item["price"]);
+
+            });
+
+
+            var price_string = subtotal.toString().substr(0,5)
+
+            $("#price_summary").html(price_string);
+            $("#tip_summary").val( (subtotal * 0.15).toFixed(2) );
+            $("#total_summary").html( (subtotal * 1.15).toFixed(2) );
+
+          } // Close 'else' that catches non-error json
+        }   // Close ajax success callback
+      });   // Close &.ajax
+    });     // Close $(".feedme").click
+
+
+    // Function that submits the already-built order to the restaurant.
+    $(".take_money").click(function() {
+
+      $(".hider").fadeIn(500);
+
+      // First, prepare all relevant data.
+      var
+      email = 'joshwcomeau@gmail.com',
+      phone = '6478967502';
+
+
+      var
+      order = {
+        rid:          built_restaurant["id"],
+        em:           email,
+        tray:         built_tray,
+        tip:          $("#tip_summary").val(),
+        first_name:   firstname,
+        last_name:    lastname,
+        phone:        phone,
+        zip:          zip,
+        addr:         street,
+        addr2:        "apartment 2",
+        city:         built_user["city"],
+        state:        built_user["state"],
+
+        card_name:          "Example User",
+        card_number:        '4111111111111111',
+        card_cvc:           '123',
+        card_expiry:        '02/2016',
+        card_bill_addr:     '1 Main St',
+        card_bill_city:     'College Station',
+        card_bill_state:    'TX',
+        card_bill_zip:      '77840',
+        card_bill_phone:    '2345678901',
+
+        delivery_date:      'ASAP'
+
+      };
+
+      $.post("<%= place_order_url %>", { args: order }, function(data) {
+        $(".hider").fadeOut(500);
+        $("#pbar").css({width: '100%'})
+        $(".step4").animate({
+          right: 0
+        }, 1000, function() {
+          startTimer();
+          $(".custom_container").fadeIn(500);
+
+        });
+      });
+
+
+
+    })
+
+
+
+
+
+    function startTimer() {
+
+      var end = new Date();
+      end.setMinutes(end.getMinutes() + 45);
+
+
+      var _second = 1000;
+      var _minute = _second * 60;
+      var _hour = _minute * 60;
+      var _day = _hour *24
+      var timer;
+
+      function showRemaining()
+      {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0 ) {
+           // handle expiry here..
+           clearInterval( timer ); // stop the timer from continuing ..
+           alert('Expired'); // alert a message that the timer has expired..
+
+           return; // break out of the function so that we do nowt update the counters with negative values..
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor( (distance % _day ) / _hour );
+        var minutes = Math.floor( (distance % _hour) / _minute );
+        var seconds = Math.floor( (distance % _minute) / _second );
+
+        $("#hours").html(hours);
+        $("#minutes").html(minutes);
+        $("#seconds").html(seconds);
+      }
+
+      timer = setInterval(showRemaining, 1000);
+    }
+
+
+    });
+
+
+  </script>
+
+
