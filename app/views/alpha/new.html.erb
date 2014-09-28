@@ -72,9 +72,18 @@
   </div>
 
   <div id="step3_options" class="step">
-
+    <div class="state_btn" id="state_btn_3" data-state-desired="4">Go to step 4</div>
   </div>
 
+
+  <div id="step4_summary" class="step">
+    <div class="state_btn" id="state_btn_4" data-state-desired="5">Go to step 5</div>
+  </div>
+
+
+  <div id="step5_confirmation" class="step">
+
+  </div>  
 
 
 
@@ -134,7 +143,8 @@ $(document).ready(function() {
     '#step1_intro':      1,
     '#step2_cuisines':   2,
     '#step3_options':    3,
-    '#step4_summary':    4
+    '#step4_summary':    4,
+    '#step5_confirmation': 5
   },
   cuisines = {
     'Indian':     false,
@@ -147,7 +157,6 @@ $(document).ready(function() {
   num_of_cuisines = 0;
 
   var change_state = function() {
-    console.log(current_state);
     var desired_state = $(this).data('state-desired');
 
     // Are we going FORWARD through the app?
