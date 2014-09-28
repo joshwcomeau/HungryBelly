@@ -37,6 +37,9 @@
 
 }
 
+
+
+
 .sampleuser_container2 {
   padding: 0 20px;
   color: #fff;
@@ -52,16 +55,8 @@
     margin-top: -242px;
   }
 
-    .sampletext_container {
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    background: #3498db;
-    margin-top: -300px;
-    padding: 0 10px;
-    text-align: center;
-  }
-
-  .sampletext_container, .usernotes_container{
+  .sampletext_container, .usernotes_container,
+  .summary2_container, .final_ty_container{
 
      p {
         margin-bottom: 13px;
@@ -74,6 +69,16 @@
         padding-bottom: 15px;
       }
   }
+
+    .sampletext_container {
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    background: #3498db;
+    margin-top: -300px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
 
   .hello {
     font-size: 25px;
@@ -118,6 +123,22 @@
 
   }
 
+  .summary2_container {
+    color: #000;
+  }
+
+  .final_ty_container {
+    color: #000;
+  }
+
+  .final_ty_text {
+    border: 1px solid #2ecc71;
+    border-radius: 10px;
+    background: #2ecc71;
+    margin-top: -300px;
+    padding: 0 10px;
+    text-align: center;
+  }
 
 }
 
