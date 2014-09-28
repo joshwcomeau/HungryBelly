@@ -1,20 +1,103 @@
-<div class="sampleuser_container2">
-  <div class="cs_logo2"><%= render partial: 'logo_sample.svg' %></div>
-  <div class="sampletext_container">
-    <p class="hello">Hi, We're HungryBelly!</p>
-    <p>We're like the Kinder Surprise of food delivery, we help you figure out what you're going to eat without the hassle of making up your mind. <span class="surprise">Remember, you don't know what you've ordered until it is delivered to you!</span></p>
-    <div class="heart"><i class="fa fa-heart fa-3x"></i></div><p class="left testers">A BIG <span class="ty">THANK YOU</span> for being our very first testers for the app!</p>
-    <div class="notes">
-    <p>Here are a couple of things to keep in mind:</p>
-    <p>1. This app is in its testing phase. So if you have any questions at any moment in time, please call Ellen at 647-298-8996. (Yes, we want you to call us!).</p>
-    <p>2. Like all newborn babies, this app needs sleep too. This is so we're fixing bugs on downtime. So if you visit us at 3am, we're probably fixing the app to create a better user experience.</p>
-    <p>3. Please have CASH upon food delivery. We don't want to be credit card information pirates. (Secured Credit Card payment will be integrated in later versions of the app.)</p>
-    <p>4. Remember to have fun!</p>
+<div class="alpha_wrapper">
+  <div id="step1_intro" class="step">
+    <div class="decorative_stripe"></div>
+    <div class="width_limiter">
+      
+      <div class="intro_container">
+        <div class="cs_logo2"><%= render partial: 'logo_sample.svg' %></div>
+
+        <h3>Why hello there!</h3>
+        <p>
+          Ready for an awesome surprise? HungryBelly takes the decision out of dinner, by sending you a hand-picked delicious meal we hope you'll love.
+        </p>
+        <h5>Here are a couple of things to keep in mind:</h5>
+        <ul>
+          <li data-number="1.">
+            This app is in its testing phase. If you run into trouble or need help, call Ellen at <span class="yellow">647-298-8996</span>.
+          </li>
+          <li data-number="2.">
+            We're taking orders from 11AM to 9PM, 7 days a week.
+          </li>
+          <li data-number="3.">
+            For now, we don't take debit or credit cards. Please have cash for the deliveryperson.
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="state_btn" id="state_btn_1" data-state-desired="2">
+        Got it, let's start!
+      </div>
+
+      <div class="testers">
+        <i class="fa fa-heart"></i>
+        Thanks for helping us test our app!
+      </div>
     </div>
   </div>
 
+  <div id="step2_cuisines" class="step">
+  <div class="cuisine_container">
+    <div class="cuisines">
 
-  <br><br><br>
+      <h2 class="craving_header">What are you Craving?</h2>
+
+      <ul class="cuisine_btns">
+        <li>
+          <button class="cat_btn" value="Indian">Indian</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Chinese">Chinese</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Mexican">Mexican</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Japanese">Japanese</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Greek">Greek</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Moroccan">Moroccan</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Korean">Korean</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Turkish">Turkish</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Thai">Thai</button>
+        </li>
+        <li>
+          <button class="cat_btn" value="Middle Eastern">Middle Eastern</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="lets_eat">
+    <ul class="lets_eat_buttons">
+      <li>
+      <button class="eat_btn" id="readytoeat"> Lock In Selection </button>
+      </li>
+      <li>
+      <button class="eat_btn" id="idgas"> I'm Not Picky</button>
+      </li>
+    </ul>
+  </div>  </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   <div class="usernotes_container">
@@ -55,3 +138,33 @@
 
 </div>
 
+<script>
+$(document).ready(function() {
+  var 
+  current_state = 1,
+  states = {
+    '#step1_intro':      1,
+    '#step2_cuisines':   2,
+    '#step3_options':    3,
+    '#step4_summary':    4
+  };
+
+  var change_state = function() {
+    var desired_state = $(this).data('state-desired');
+
+    // Are we going FORWARD through the app?
+    if ( desired_state > current_state ) {
+      _.each(states, function(value, key) {
+        if ( value === current_state || value === desired_state ) {
+          $(key).animate({
+            top: "-100%"
+          }, 1000);
+        }
+      });  
+    }
+    
+  }
+
+  $(".state_btn").on("click", change_state);
+});
+</script>

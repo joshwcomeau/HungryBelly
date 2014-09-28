@@ -1,107 +1,184 @@
 @import 'variables';
 
-.alpha_wrapper {
-  padding: 0 20px;
+
+html, body, .alpha_wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+.yellow {
+  color: $yellow;
+}
+.step {
+  position: relative;
+  overflow: scroll;
+  height: 100%;
+}
+#step1_intro {
+  background: $yellow;
   color: #fff;
 
-  .cs_logo2 svg {
-    width: 120px;
+  .decorative_stripe {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    height: 25%;
+    background-color: $green;
   }
 
   .cs_logo2 {
-    margin-right: auto;
-    margin-left: auto;
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    margin-left: -60px;
+    z-index: 3;
     text-align: center;
-    margin-top: -242px;
-  }
 
-  .sampletext_container, .usernotes_container,
-  .summary2_container, .final_ty_container{
-
-     p {
-        margin-bottom: 13px;
-      }
-      p:first-child {
-      padding-top: 45px;
-      }
-
-      p:last-child {
-        padding-bottom: 15px;
-      }
-  }
-
-    .sampletext_container {
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    background: #3498db;
-    margin-top: -300px;
-    padding: 0 10px;
-    text-align: center;
-  }
-
-
-  .hello {
-    font-size: 25px;
-    color: #34495e
-  }
-
-  .surprise {
-    font-style: italic;
-  }
-
-  .heart {
-    float: left;
-    .fa-heart {
-      color: #e74c3c;
+    svg {
+      height: 150px;
+      width: 120px;
     }
   }
 
-  .left {
-    text-align: left;
+  .width_limiter {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .intro_container {
+    position: relative;
+    z-index: 2;
+    border-radius: 30px 30px 10px 10px;
+    background: #3498db;
+    margin: 6rem 1.5rem 0 1.5rem;
+    padding: 1.8rem 1rem 1rem 1rem;
+    border-bottom: 3px solid darken($blue, 20%);
+    border-right: 1px solid darken($blue, 12%);
+    
+    h3 {
+      font-size: 1.6rem;
+      text-align: center;
+      color: #34495e
+    }
+
+    h5 {
+      background: $red;
+      text-align: center;
+      margin: 2rem -1rem 0.5rem -1rem;
+      padding: 0.5rem;
+    }
+    p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      color: lighten($yellow, 10%);
+      text-align: justify;
+    }
+
+    li {
+      line-height: 1.5em;
+      padding: 0.5rem 0;
+      border-bottom: 1px dotted darken($blue, 15%);
+
+      &:last-of-type {
+        border-bottom: 0px;
+        padding-bottom: 0;
+      }
+      &:before {
+        content: attr(data-number);
+        position: relative;
+        font-size: 1.3em;
+        display: inline-block;
+        font-weight: bold;
+        padding-right: 0.25rem;
+        
+        color: $yellow;
+      }
+    }
+
+    .ty {
+      margin-top: 0.5rem;
+      color: lighten($green, 25%);
+    }
+  }
+
+  #state_btn_1 {
+    position: relative;
+    z-index: 2;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    background: $green;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2rem;
+    text-shadow: 1px 1px 0px darken($green, 10%);
+    border-bottom: 3px solid darken($green, 20%);
+    border-right: 1px solid darken($green, 12%);
+  }
+
+
+  .heart {
+    
   }
 
   .testers {
-    padding-left: 64px;
-    margin-top: 22px;
-  }
-
-  .ty {
-    color: #e74c3c;
-  }
-
-  .notes {
-    margin-top: 23px;
-    text-align: left;
-  }
-
-  .usernotes_container {
-    color: #000;
-
-    textarea {
-      width: 100%;
-    }
-
-  }
-
-  .summary2_container {
-    color: #000;
-  }
-
-  .final_ty_container {
-    color: #000;
-  }
-
-  .final_ty_text {
-    border: 1px solid #2ecc71;
-    border-radius: 10px;
-    background: #2ecc71;
-    margin-top: -300px;
-    padding: 0 10px;
     text-align: center;
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    color: $red;
+
+    .fa-heart {
+      color: $red;
+    }
+  }
+}
+
+#step2_cuisines {
+  background: $blue;
+}
+
+.usernotes_container {
+  color: #000;
+
+  textarea {
+    width: 100%;
   }
 
 }
 
+.summary2_container {
+  color: #000;
+}
+
+.final_ty_container {
+  color: #000;
+}
+
+.final_ty_text {
+  border: 1px solid #2ecc71;
+  border-radius: 10px;
+  background: #2ecc71;
+  margin-top: -300px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.sampletext_container, .usernotes_container,
+.summary2_container, .final_ty_container{
+
+  p {
+    margin-bottom: 13px;
+  }
+
+  p:last-child {
+    padding-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 640px) {
+
+}
 
 
 
