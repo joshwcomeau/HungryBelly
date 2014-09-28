@@ -59,8 +59,11 @@
     margin-top: -300px;
     padding: 0 10px;
     text-align: center;
+  }
 
-      p {
+  .sampletext_container, .usernotes_container{
+
+     p {
         margin-bottom: 13px;
       }
       p:first-child {
@@ -70,7 +73,6 @@
       p:last-child {
         padding-bottom: 15px;
       }
-
   }
 
   .hello {
@@ -105,6 +107,15 @@
   .notes {
     margin-top: 23px;
     text-align: left;
+  }
+
+  .usernotes_container {
+    color: #000;
+
+    textarea {
+      width: 100%;
+    }
+
   }
 
 
