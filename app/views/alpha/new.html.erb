@@ -3,7 +3,7 @@
   <div id="step1_intro" class="step">
     <div class="decorative_stripe"></div>
     <div class="width_limiter">
-      
+
       <div class="intro_container">
         <div class="cs_logo2"><%= render partial: 'logo_sample.svg' %></div>
 
@@ -20,7 +20,7 @@
             We're taking orders from 11AM to 9PM, 7 days a week.
           </li>
           <li data-number="3.">
-            For now, we don't take debit or credit cards. Please have cash for the deliveryperson.
+            For now, we don't take debit or credit cards. Please have cash for the delivery person.
           </li>
         </ul>
 
@@ -67,12 +67,25 @@
         I'm Not Picky
       </div>
 
-      
+
     </div>
   </div>
 
   <div id="step3_options" class="step">
-    <div class="state_btn" id="state_btn_3" data-state-desired="4">Go to step 4</div>
+    <div class="state_btn" id="state_btn_3" data-state-desired="4">
+      <h2 class="serving_header">How many servings?</h2>
+    </div>
+    <div class="select_dropdown">
+      <select>
+          <option value="1">1 person</option>
+          <option value="2">2 people</option>
+          <option value="3">3 people</option>
+          <option value="4">4 people</option>
+          <option value="5">5 people</option>
+          <option value="6">6 people</option>
+      </select>
+      <p>click to change # of servings</p>
+    </div>
   </div>
 
 
@@ -83,7 +96,7 @@
 
   <div id="step5_confirmation" class="step">
 
-  </div>  
+  </div>
 
 
 
@@ -137,7 +150,7 @@
 
 <script>
 $(document).ready(function() {
-  var 
+  var
   current_state = 1,
   states = {
     '#step1_intro':      1,
@@ -168,7 +181,7 @@ $(document).ready(function() {
             marginTop: offset
           }, 1000);
         }
-      });  
+      });
 
       current_state = desired_state;
     }

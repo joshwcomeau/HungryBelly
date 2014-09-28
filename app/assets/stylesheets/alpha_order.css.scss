@@ -60,7 +60,7 @@ html, body, .alpha_wrapper, .new_order {
     padding: 1.8rem 1rem 1rem 1rem;
     border-bottom: 3px solid darken($blue, 20%);
     border-right: 1px solid darken($blue, 12%);
-    
+
     h3 {
       font-size: 1.6rem;
       text-align: center;
@@ -96,7 +96,7 @@ html, body, .alpha_wrapper, .new_order {
         display: inline-block;
         font-weight: bold;
         padding-right: 0.25rem;
-        
+
         color: $yellow;
       }
     }
@@ -124,7 +124,7 @@ html, body, .alpha_wrapper, .new_order {
 
 
   .heart {
-    
+
   }
 
   .testers {
@@ -176,7 +176,7 @@ html, body, .alpha_wrapper, .new_order {
   }
 
   .craving_header {
-    padding: 1.5rem 0; 
+    padding: 1.5rem 0;
     font-size: 1.75rem;
     text-align: center;
   }
@@ -197,6 +197,32 @@ html, body, .alpha_wrapper, .new_order {
 
 #step3_options {
   background: $yellow;
+
+  .serving_header {
+    padding: 1.5rem 0;
+    font-size: 1.75rem;
+    text-align: center;
+    background: $red;
+    color: #fff;
+    margin-top: 17px;
+  }
+
+  .select_dropdown {
+    margin: 50px auto;
+    text-align: center;
+  }
+
+ select {
+      border: 0 !important;.  /*Removes border*/
+     -webkit-appearance: none;  /*Removes default chrome and safari style*/
+     -moz-appearance: none;  /*Removes default style Firefox*/
+    font-size: 2.5rem;
+    background: none;
+    color: #2c3e50;
+    text-decoration: underline;
+    font-style: bold;
+  }
+
 }
 
 
