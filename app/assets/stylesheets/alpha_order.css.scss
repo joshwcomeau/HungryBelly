@@ -1,46 +1,11 @@
-.sampleuser_container{
-  background: #fff;
-
-  .step1, .step2{
-    width: 100%;
-  }
-
-  .lets_eat {
-    width: 100%;
-  }
-
-  .cuisine_container {
-    width: 100%;
-    padding-top: 30px;
-  }
-
-  .order_container, .delivery_container, .feed_me_container {
-    height: none;
-  }
-
-  .lets_eat {
-    position: relative;
-  }
-
-  .lets_eat_buttons {
-    margin-top: 8% ;
-  }
-
-  #slider {
-    width: 100%;
-  }
-
-  .order_details, .delivery_details, .feed_me, .billing_details {
-    width: 100%;
-    max-width: 400px;
-  }
-
-}
+@import 'variables';
 
 
 
 
-.sampleuser_container2 {
+
+
+.alpha_wrapper {
   padding: 0 20px;
   color: #fff;
 
