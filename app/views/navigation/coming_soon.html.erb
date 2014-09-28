@@ -36,18 +36,33 @@ $(document).ready(function() {
   $(".back_splash").animate({
     opacity: 1
   }, 1000);
-});
-$("form").on("ajax:complete", function(e, xhr, success) {
-  data = JSON.parse(xhr.responseText);
 
-  if ( data['success'] == false ) {
-    alert("Oh no! Is that a valid email address?");
-  } else {
-    $(this).parent().slideUp(500, function() {
-      $(".success_msg").slideDown(500);
-    });
 
-  }
+  var email_regex = /^[\w\d.-]+@[\w\d.-]+\.[\w\d.-]{2,20}$/i
+  $("form").on("submit", function(e) {
+    var email = $("#contact_email").val();
 
+    if (email_regex.test(email)) {
+      console.log("Valid");
+      return true;
+    } else {
+      console.log("Invalid :(");
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  $("form").on("ajax:complete", function(e, xhr, success) {
+    data = JSON.parse(xhr.responseText);
+
+    if ( data['success'] == false ) {
+      alert("Oh no! Is that a valid email address?");
+    } else {
+      $(this).parent().slideUp(500, function() {
+        $(".success_msg").slideDown(500);
+      });
+
+    }
+  });
 });
 </script>
