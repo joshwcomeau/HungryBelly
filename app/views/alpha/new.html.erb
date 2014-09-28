@@ -107,12 +107,25 @@
 
 
 
-  <div id="step4_summary" class="step">
+  <div id="step4_notes" class="step">
+    <div class="notes_container">
+     <div class="toknow">Things we should know...</div>
+    <div class="notes_text">
+      <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
+
+      <p class="inform">*We will inform the restaurant of your dietary restrictions, but it cannot be 100% guaranteed.</p>
+
+      <textarea rows="10" placeholder="I am allergic to shrimp!"></textarea>
+
+     </div>
+
     <div class="state_btn" id="state_btn_4" data-state-desired="5">Go to step 5</div>
+
+  </div>
   </div>
 
 
-  <div id="step5_confirmation" class="step">
+  <div id="step5_summary" class="step">
 
   </div>
 
@@ -174,8 +187,9 @@ $(document).ready(function() {
     '#step1_intro':      1,
     '#step2_cuisines':   2,
     '#step3_options':    3,
-    '#step4_summary':    4,
-    '#step5_confirmation': 5
+    '#step4_notes':      4,
+    '#step5_summary':    5,
+    '#step6_confirmation': 6
   },
   cuisines = {
     'Indian':     false,

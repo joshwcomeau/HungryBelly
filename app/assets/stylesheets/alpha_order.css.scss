@@ -258,9 +258,43 @@ html, body, .alpha_wrapper, .new_order {
 }
 
 
-#step4_summary {
+#step4_notes {
   background: $red;
+
+  .notes_container {
+    margin: 30px 15px;
+
+    .toknow {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    .notes_text{
+    background: #FFFCF4;
+    padding: 10px;
+    border-radius: 10px;
+    }
+
+    .allergies {
+      font-size: 1.4rem;
+      padding: 20px 0;
+    }
+
+    .italicize {
+      font-style: italic;
+    }
+
+    .inform {
+      padding-bottom:22px;
+    }
+
+    textarea {
+      width: 100%;
+    }
+  }
 }
+
 
 
 #step5_confirmation {
