@@ -168,6 +168,12 @@ html, body, .alpha_wrapper, .new_order {
     margin-bottom: 10px;
     text-align: center;
   }
+  .selected {
+    background-color: $green !important;
+  }
+  .cuisine_checkbox {
+    display: none;
+  }
 
   .craving_header {
     padding: 1.5rem 0; 
@@ -175,52 +181,29 @@ html, body, .alpha_wrapper, .new_order {
     text-align: center;
   }
 
-  .lets_eat {
+  #state_btn_2 {
+    background: $red;
     width: 100%;
-    position: relative;
-    right: auto;
-    top: auto;
-    bottom: auto;
-  }
-
-  .eat_btn{
-    color: #ee3e23;
-    background-color: #fff;
-    border: 3px solid #ee3e23;
-    font-size: 24px;
-    border-radius:10px;
-    padding: 20px 10px;
-    text-align: center;
+    color: #FFF;
+    font-size: 30px;
+    padding: 20px 0;
     cursor: pointer;
-  }
-
-
-
-  .lets_eat_buttons {
     text-align: center;
-    margin-top: 40%;
-  }
-
-  .lets_eat_buttons button {
-    width: 75%;
-    margin-bottom: 10px;
-    transition: 0.2s;
-  }
-
-  .highlight{
-    background: #00A5A8;
-  }
-
-
-
-  .eat_btn:hover{
-    background-color: #00A5A8;
-    border-color: #00A5A8;
-    color:#FFF;
-    transition: 0.2s;
+    margin-top: 1.5rem;
   }
 
 }
+
+
+#step3_options {
+  background: $yellow;
+}
+
+
+
+
+
+
 
 .usernotes_container {
   color: #000;

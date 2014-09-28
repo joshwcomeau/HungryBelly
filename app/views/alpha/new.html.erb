@@ -39,26 +39,41 @@
 
   <div id="step2_cuisines" class="step">
     <div class="width_limiter">
+      <%= fields_for :cuisines do |cfield| %>
+        <% Cuisine.all.each do |cuisine| %>
+
+          <%= cfield.check_box cuisine.name, {multiple: true, class: 'cuisine_checkbox'}, cuisine.id, nil %>
+        <% end %>
+      <% end %>
 
       <div class="cuisine_container">
         <h2 class="craving_header">What are you Craving?</h2>
         <h4>Click all that apply.</h4>
-        <div class="c6">
-          <div class="cat_btn" data-value="#cuisine_Indian">Indian</div>
-          <div class="cat_btn" data-value="#cuisine_Chinese">Chinese</div>
-          <div class="cat_btn" data-value="#cuisine_Japanese">Japanese</div>
+        <div class="grid">
+          <div class="c6">
+            <div class="cat_btn">Indian</div>
+            <div class="cat_btn">Chinese</div>
+            <div class="cat_btn">Japanese</div>
+          </div>
+          <div class="c6">
+            <div class="cat_btn">American</div>
+            <div class="cat_btn">Greek</div>
+            <div class="cat_btn">Italian</div>
+          </div>
         </div>
-        <div class="c6">
-          <div class="cat_btn" data-value="#cuisine_American">American</div>
-          <div class="cat_btn" data-value="#cuisine_Greek">Greek</div>
-          <div class="cat_btn" data-value="#cuisine_Italian">Italian</div>
-        </div>
-      
       </div>
+
+      <div class="state_btn" id="state_btn_2" data-state-desired="3">
+        I'm Not Picky
+      </div>
+
       
     </div>
   </div>
 
+  <div id="step3_options" class="step">
+
+  </div>
 
 
 
@@ -124,21 +139,24 @@ $(document).ready(function() {
   cuisines = {
     'Indian':     false,
     'Chinese':    false,
-    'Jaoanese':   false,
+    'Japanese':   false,
     'American':   false,
     'Greek':      false,
     'Italian':    false
-  };
+  },
+  num_of_cuisines = 0;
 
   var change_state = function() {
+    console.log(current_state);
     var desired_state = $(this).data('state-desired');
 
     // Are we going FORWARD through the app?
     if ( desired_state > current_state ) {
       _.each(states, function(value, key) {
-        if ( value === current_state || value === desired_state ) {
+        if ( value === current_state ) {
+          var offset = "-" + $(window).height() + "px";
           $(key).animate({
-            top: "-100%"
+            marginTop: offset
           }, 1000);
         }
       });  
@@ -150,12 +168,22 @@ $(document).ready(function() {
   var toggle_cuisine = function() {
     var clicked_cuisine = $(this).text();
 
-    if ( cuisines["clicked_cuisine"] === true ) {
+    if ( cuisines[clicked_cuisine] === true ) {
       $(this).removeClass("selected");
-      
-      cuisines["clicked_cuisine"] = false;
+      $("#cuisines_"+clicked_cuisine).prop("checked", false);
+      cuisines[clicked_cuisine] = false;
+      num_of_cuisines--;
     } else {
+      $(this).addClass("selected");
+      $("#cuisines_"+clicked_cuisine).prop("checked", true);
+      cuisines[clicked_cuisine] = true;
+      num_of_cuisines++;
+    }
 
+    if (num_of_cuisines > 0) {
+      $("#state_btn_2").text("Lock In Selection");
+    } else {
+      $("#state_btn_2").text("I'm Not Picky");
     }
   }
 
