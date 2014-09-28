@@ -43,10 +43,9 @@ $(document).ready(function() {
     var email = $("#contact_email").val();
 
     if (email_regex.test(email)) {
-      console.log("Valid");
       return true;
     } else {
-      console.log("Invalid :(");
+      alert("Please enter a valid email address (eg. name@domain.com)");
       e.preventDefault();
       return false;
     }
