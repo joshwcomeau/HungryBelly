@@ -253,26 +253,26 @@ hr{
 }
 
 
-
-input[type=text]{
-  width:100%;
-  color:#404041;
-  background: #d1d2d4;
-  font-size: 1.4rem;
-  padding:4px;
-  margin: 5px 0px;
-  outline: none;
-  border: 3px solid rgba(0,0,0,0);
-  font-weight: 700;
-  border-radius:10px;
-  font-family: 'Cabin', sans-serif;
-}
-  input[type=text]:focus {
-    background: #EEE;
-    border-bottom: 1px solid #AAA;
-    border-right: 1px solid #AAA;
+.sample_signup {
+  input[type=text]{
+    width:100%;
+    color:#404041;
+    background: #d1d2d4;
+    font-size: 1.4rem;
+    padding:4px;
+    margin: 5px 0px;
+    outline: none;
+    border: 3px solid rgba(0,0,0,0);
+    font-weight: 700;
+    border-radius:10px;
+    font-family: 'Cabin', sans-serif;
   }
-
+    input[type=text]:focus {
+      background: #EEE;
+      border-bottom: 1px solid #AAA;
+      border-right: 1px solid #AAA;
+    }
+}
 
 ::-webkit-input-placeholder {
    font-family: 'Cabin', sans-serif;
