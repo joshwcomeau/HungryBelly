@@ -235,10 +235,24 @@ html, body, .alpha_wrapper, .new_order {
 
   }
 
-
-
   .click_change {
     color: #3d566e;
+  }
+
+  #state_btn_3 {
+    position: relative;
+    z-index: 2;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    background: $green;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2rem;
+    text-shadow: 1px 1px 0px darken($green, 10%);
+    border-bottom: 3px solid darken($green, 20%);
+    border-right: 1px solid darken($green, 12%);
+    color: #fff;
   }
 
 }
