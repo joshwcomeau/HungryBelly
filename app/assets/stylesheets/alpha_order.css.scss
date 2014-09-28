@@ -1,7 +1,7 @@
 @import 'variables';
 
 
-html, body, .alpha_wrapper {
+html, body, .alpha_wrapper, .new_order {
   height: 100%;
   overflow: hidden;
 }
@@ -9,11 +9,19 @@ html, body, .alpha_wrapper {
 .yellow {
   color: $yellow;
 }
+.width_limiter {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .step {
   position: relative;
   overflow: scroll;
   height: 100%;
 }
+
+
+
 #step1_intro {
   background: $yellow;
   color: #fff;
@@ -41,10 +49,7 @@ html, body, .alpha_wrapper {
     }
   }
 
-  .width_limiter {
-    max-width: 700px;
-    margin: 0 auto;
-  }
+
 
   .intro_container {
     position: relative;
@@ -134,8 +139,87 @@ html, body, .alpha_wrapper {
   }
 }
 
+
+
 #step2_cuisines {
-  background: $blue;
+  background: $lightgrey;
+
+  .cuisine_container {
+    position: relative;
+    background: $lightgrey;
+    width:100%;
+    padding: 0 1rem;
+    height: auto;
+  }
+
+  .cuisines {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .cat_btn {
+    color: #fff;
+    background-color: $blue;
+    border: none;
+    font-size: 24px;
+    width: 100%;
+    padding: 20px 0px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .craving_header {
+    padding: 1.5rem 0; 
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .lets_eat {
+    width: 100%;
+    position: relative;
+    right: auto;
+    top: auto;
+    bottom: auto;
+  }
+
+  .eat_btn{
+    color: #ee3e23;
+    background-color: #fff;
+    border: 3px solid #ee3e23;
+    font-size: 24px;
+    border-radius:10px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+
+
+  .lets_eat_buttons {
+    text-align: center;
+    margin-top: 40%;
+  }
+
+  .lets_eat_buttons button {
+    width: 75%;
+    margin-bottom: 10px;
+    transition: 0.2s;
+  }
+
+  .highlight{
+    background: #00A5A8;
+  }
+
+
+
+  .eat_btn:hover{
+    background-color: #00A5A8;
+    border-color: #00A5A8;
+    color:#FFF;
+    transition: 0.2s;
+  }
+
 }
 
 .usernotes_container {
@@ -176,9 +260,6 @@ html, body, .alpha_wrapper {
   }
 }
 
-@media screen and (min-width: 640px) {
-
-}
 
 
 

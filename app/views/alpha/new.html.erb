@@ -1,3 +1,4 @@
+<%= form_for @order do |f| %>
 <div class="alpha_wrapper">
   <div id="step1_intro" class="step">
     <div class="decorative_stripe"></div>
@@ -37,55 +38,26 @@
   </div>
 
   <div id="step2_cuisines" class="step">
-  <div class="cuisine_container">
-    <div class="cuisines">
+    <div class="width_limiter">
 
-      <h2 class="craving_header">What are you Craving?</h2>
-
-      <ul class="cuisine_btns">
-        <li>
-          <button class="cat_btn" value="Indian">Indian</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Chinese">Chinese</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Mexican">Mexican</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Japanese">Japanese</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Greek">Greek</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Moroccan">Moroccan</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Korean">Korean</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Turkish">Turkish</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Thai">Thai</button>
-        </li>
-        <li>
-          <button class="cat_btn" value="Middle Eastern">Middle Eastern</button>
-        </li>
-      </ul>
+      <div class="cuisine_container">
+        <h2 class="craving_header">What are you Craving?</h2>
+        <h4>Click all that apply.</h4>
+        <div class="c6">
+          <div class="cat_btn" data-value="#cuisine_Indian">Indian</div>
+          <div class="cat_btn" data-value="#cuisine_Chinese">Chinese</div>
+          <div class="cat_btn" data-value="#cuisine_Japanese">Japanese</div>
+        </div>
+        <div class="c6">
+          <div class="cat_btn" data-value="#cuisine_American">American</div>
+          <div class="cat_btn" data-value="#cuisine_Greek">Greek</div>
+          <div class="cat_btn" data-value="#cuisine_Italian">Italian</div>
+        </div>
+      
+      </div>
+      
     </div>
   </div>
-  <div class="lets_eat">
-    <ul class="lets_eat_buttons">
-      <li>
-      <button class="eat_btn" id="readytoeat"> Lock In Selection </button>
-      </li>
-      <li>
-      <button class="eat_btn" id="idgas"> I'm Not Picky</button>
-      </li>
-    </ul>
-  </div>  </div>
 
 
 
@@ -137,6 +109,7 @@
 
 
 </div>
+<% end %>
 
 <script>
 $(document).ready(function() {
@@ -147,6 +120,14 @@ $(document).ready(function() {
     '#step2_cuisines':   2,
     '#step3_options':    3,
     '#step4_summary':    4
+  },
+  cuisines = {
+    'Indian':     false,
+    'Chinese':    false,
+    'Jaoanese':   false,
+    'American':   false,
+    'Greek':      false,
+    'Italian':    false
   };
 
   var change_state = function() {
@@ -161,10 +142,24 @@ $(document).ready(function() {
           }, 1000);
         }
       });  
+
+      current_state = desired_state;
     }
-    
+  }
+
+  var toggle_cuisine = function() {
+    var clicked_cuisine = $(this).text();
+
+    if ( cuisines["clicked_cuisine"] === true ) {
+      $(this).removeClass("selected");
+      
+      cuisines["clicked_cuisine"] = false;
+    } else {
+
+    }
   }
 
   $(".state_btn").on("click", change_state);
+  $(".cat_btn").on("click", toggle_cuisine);
 });
 </script>
