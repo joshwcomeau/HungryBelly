@@ -101,7 +101,17 @@
       </div>
     </div>
 
-     <div class="state_btn" id="state_btn_3" data-state-desired="4">I'm Hungry!</div>
+    <h3 class="delivery_heading delivery_header">Delivery Address</h3>
+      <form>
+        <input type="text" name="firstname" class="firstname" placeholder="First Name"><br>
+        <input type="text" name="lastname" class="lastname" placeholder="Last Name"><br>
+        <input type="text" name="street" class="street" placeholder="Street"><br>
+        <input type="text" name="postal" class="postal" placeholder="Postal Code">
+        <input type="text" name="phone" class="phone" placeholder="Phone">
+        <input type="text" name="email" class="email" placeholder="Email">
+      </form>
+
+     <div class="state_btn" id="state_btn_3" data-state-desired="4">Submit</div>
   </div>
 
 
@@ -109,23 +119,38 @@
 
   <div id="step4_notes" class="step">
     <div class="notes_container">
-     <div class="toknow">Things we should know...</div>
-    <div class="notes_text">
-      <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
+      <div class="toknow">Things we should know...</div>
+        <div class="notes_text">
+          <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
 
-      <p class="inform">*We will inform the restaurant of your dietary restrictions, but it cannot be 100% guaranteed.</p>
+          <p class="inform">*We will inform the restaurant of your dietary restrictions, but it cannot be 100% guaranteed.</p>
 
-      <textarea rows="10" placeholder="I am allergic to shrimp!"></textarea>
+          <textarea rows="10" placeholder="(i.e. I am allergic to shrimp!)"></textarea>
 
-     </div>
+        </div>
 
-    <div class="state_btn" id="state_btn_4" data-state-desired="5">Go to step 5</div>
-
+    <div class="state_btn" id="state_btn_4" data-state-desired="5">On we go!</div>
+    </div>
   </div>
-  </div>
 
 
-  <div id="step5_summary" class="step">
+  <div id="step5_confirmation" class="step">
+          <div class="last_thing">Oh, one last thing...</div>
+    <div class="summary1_container">
+
+      <p> We just want to make sure we got your order right. <strong>Please review!</strong></p>
+
+      <div class="summarize">
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait</p>
+      </div>
+
+      <center><div id="state_btn_5" data-state-desired="6" class="state_btn modalButton button red text-blanco text-shadow-negra feedme" data-popup="popupOne">Feed Me</div></center>
+      </div>
+
+    </div>
+
+  <div id="step6_thankyou" class="step">
+    <p>THANK YOU SCREEN</p>
 
   </div>
 
@@ -188,8 +213,8 @@ $(document).ready(function() {
     '#step2_cuisines':   2,
     '#step3_options':    3,
     '#step4_notes':      4,
-    '#step5_summary':    5,
-    '#step6_confirmation': 6
+    '#step5_confirmation': 5,
+    '#step6_thankyou': 6
   },
   cuisines = {
     'Indian':     false,

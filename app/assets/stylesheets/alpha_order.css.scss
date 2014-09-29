@@ -198,7 +198,7 @@ html, body, .alpha_wrapper, .new_order {
 #step3_options {
   background: $yellow;
 
-  .serving_header, .budget_header {
+  .serving_header, .budget_header, .delivery_header {
     padding: 1.5rem 0;
     font-size: 1.75rem;
     text-align: center;
@@ -237,6 +237,10 @@ html, body, .alpha_wrapper, .new_order {
 
   .click_change {
     color: #3d566e;
+  }
+
+  .delivery_header {
+    margin-bottom: 21px;
   }
 
   #state_btn_3 {
@@ -291,14 +295,65 @@ html, body, .alpha_wrapper, .new_order {
 
     textarea {
       width: 100%;
+      background: #313A47;
+      border: none;
+      border-radius: 3px;
+      font-size: 1rem;
+      color: #fff;
     }
+
+     #state_btn_4 {
+    position: relative;
+    z-index: 2;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    background: $yellow;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2rem;
+    text-shadow: 1px 1px 0px darken($yellow, 10%);
+    border-bottom: 3px solid darken($yellow, 20%);
+    border-right: 1px solid darken($yellow, 12%);
+    color: #fff;
+  }
+
   }
 }
 
 
 
 #step5_confirmation {
-  background: $green;
+  background: #ded9d2;
+
+  .summary1_container {
+    padding: 20px 15px;
+
+    p {
+      font-size: 1.3rem;
+    }
+  }
+
+  .last_thing {
+    font-size: 2rem;
+    background: #3d566e;
+    color: #fff;
+    padding: 15px 20px;
+  }
+
+  .summarize {
+    background: #fff;
+    margin: 20px 0px;
+    padding: 15px 10px;
+    border-radius: 9px;
+    font-size: 1.2rem;
+  }
+
+  .button {
+    top: 0px;
+    background: #ee3e23;
+  }
+
 }
 
 
