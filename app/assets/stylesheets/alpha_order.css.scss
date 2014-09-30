@@ -362,7 +362,7 @@ html, body, .alpha_wrapper, .new_order {
   .summary1_container {
     padding: 20px 15px;
 
-    p {
+    p, span {
       font-size: 1.3rem;
     }
   }
@@ -380,6 +380,19 @@ html, body, .alpha_wrapper, .new_order {
     padding: 15px 10px;
     border-radius: 9px;
     font-size: 1.2rem;
+
+    .name_label {
+      font-weight: bold;
+    }
+
+    .input_block {
+      margin-bottom: 10px;
+    }
+
+    .addy_block, .notes_block {
+      margin: 10px 0px 10px 65px;
+    }
+
   }
 
   .button {
