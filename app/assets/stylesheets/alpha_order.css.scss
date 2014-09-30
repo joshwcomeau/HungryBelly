@@ -252,7 +252,7 @@ html, body, .alpha_wrapper, .new_order {
     color: #fbfcfc;
     text-decoration: underline;
     font-weight: bold;
-
+    outline: none;
   }
 
   .click_change {
@@ -273,6 +273,7 @@ html, body, .alpha_wrapper, .new_order {
 
   .address_inputs {
     padding: 0 1rem;
+
     input[type=text] {
       margin: 0.2rem 0;
       padding: 0.25rem;
@@ -386,6 +387,11 @@ html, body, .alpha_wrapper, .new_order {
     background: #ee3e23;
   }
 
+  #state_btn_5 {
+    left: 50%;
+    margin-left: -100px;
+  }
+
 }
 
 #step6_thankyou {
@@ -484,7 +490,7 @@ html, body, .alpha_wrapper, .new_order {
 
 
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 700px) {
   #step3_options .choice {
     margin: 1rem 0 0 0;
   }

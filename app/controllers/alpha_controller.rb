@@ -3,9 +3,5 @@ class AlphaController < ApplicationController
     @order = Order.new    
     render layout: "alpha_application"
   end
-
-  def create
-
-  end
 end
 
