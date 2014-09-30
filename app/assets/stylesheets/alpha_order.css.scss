@@ -356,7 +356,55 @@ html, body, .alpha_wrapper, .new_order {
 
 }
 
+#step6_thankyou {
+  background: $blue;
 
+
+  .cs_logo3 {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    height: 280px;
+
+    svg {
+      width: 200px;
+      margin-top: -165px;
+    }
+  }
+
+  .ty_final {
+    text-align: center;
+    background: #f3f7ec;
+    margin: 0px 10px;
+    border-radius: 13px;
+    padding: 15px 5px;
+
+    .ty {
+      font-size: 2.5rem;
+      color: #34495e;
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+
+    .arrive{
+      font-size: 1.3rem;
+      padding-bottom: 10px;
+    }
+
+    .phone {
+      color: $blue;
+    }
+
+    .enjoy {
+      font-size: 2.8rem;
+      color: #34495e;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+  }
+
+}
 
 
 

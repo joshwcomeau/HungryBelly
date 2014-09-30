@@ -118,40 +118,50 @@
 
 
   <div id="step4_notes" class="step">
-    <div class="notes_container">
-      <div class="toknow">Things we should know...</div>
-        <div class="notes_text">
-          <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
+    <div class="width_limiter">
+      <div class="notes_container">
+        <div class="toknow">Things we should know...</div>
+          <div class="notes_text">
+            <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
 
-          <p class="inform">*We will inform the restaurant of your dietary restrictions, but it cannot be 100% guaranteed.</p>
+            <p class="inform">*We will inform the restaurant of your dietary restrictions, but it cannot be 100% guaranteed.</p>
 
-          <textarea rows="10" placeholder="(i.e. I am allergic to shrimp!)"></textarea>
+            <textarea rows="10" placeholder="(i.e. I am allergic to shrimp!)"></textarea>
 
-        </div>
+          </div>
 
-    <div class="state_btn" id="state_btn_4" data-state-desired="5">On we go!</div>
+      <div class="state_btn" id="state_btn_4" data-state-desired="5">On we go!</div>
+      </div>
     </div>
   </div>
 
 
   <div id="step5_confirmation" class="step">
-          <div class="last_thing">Oh, one last thing...</div>
-    <div class="summary1_container">
+    <div class="width_limiter">
+      <div class="last_thing">Oh, one last thing...</div>
+        <div class="summary1_container">
 
-      <p> We just want to make sure we got your order right. <strong>Please review!</strong></p>
+        <p> We just want to make sure we got your order right. <strong>Please review!</strong></p>
 
-      <div class="summarize">
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait</p>
+          <div class="summarize">
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait</p>
+          </div>
+
+        <center><div id="state_btn_5" data-state-desired="6" class="state_btn modalButton button red text-blanco text-shadow-negra feedme" data-popup="popupOne">Feed Me</div></center>
       </div>
-
-      <center><div id="state_btn_5" data-state-desired="6" class="state_btn modalButton button red text-blanco text-shadow-negra feedme" data-popup="popupOne">Feed Me</div></center>
-      </div>
-
     </div>
+  </div>
 
   <div id="step6_thankyou" class="step">
-    <p>THANK YOU SCREEN</p>
-
+    <div class="width_limiter">
+      <div class="cs_logo3"><%= render partial: 'logo_sample.svg' %></div>
+        <div class="ty_final">
+          <p class="ty">Thank you!</p>
+          <p class="arrive">Your food should arrive shortly!</p>
+          <p>In the event that the food delivery is taking longer than 60 minutes, please contact Ellen at <span class="phone">647-298-8996</span>.</p>
+          <p class="enjoy">Enjoy!</P>
+        </div>
+    </div>
   </div>
 
 
