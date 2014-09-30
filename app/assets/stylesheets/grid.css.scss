@@ -23,6 +23,14 @@
   }
 }
 
+.c6-s {
+  float: left;
+  padding-right: $gutter_size/2;
+  .grid &:last-of-type {
+    padding-right: 0;
+  }
+}
+
 // Optional outer gutters
 .padded_grid {
   padding: $gutter_size;
@@ -45,7 +53,7 @@
 .column_5-12, .c5 {
   width: 41.66%;
 }
-.column_6-12, .c6, .column_1-2, .column_3-6 {
+.column_6-12, .c6, .column_1-2, .column_3-6, .c6-s {
   width: 50%;
 }
 .column_7-12, .c7 {

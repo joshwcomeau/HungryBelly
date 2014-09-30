@@ -9,6 +9,14 @@ html, body, .alpha_wrapper, .new_order {
 .yellow {
   color: $yellow;
 }
+
+.bg_green {
+  background-color: $green;
+}
+.bg_blue {
+  background-color: $blue;
+}
+
 .width_limiter {
   max-width: 700px;
   margin: 0 auto;
@@ -143,6 +151,20 @@ html, body, .alpha_wrapper, .new_order {
 
 #step2_cuisines {
   background: $lightgrey;
+  
+  h2 {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    font-size: 1.75rem;
+    text-align: center;
+  }
+  
+  h4 {
+    text-align: center;
+    color: lighten($darkgrey, 20%);
+    font-weight: normal;
+    padding-bottom: 1rem;
+  }
 
   .cuisine_container {
     position: relative;
@@ -175,12 +197,6 @@ html, body, .alpha_wrapper, .new_order {
     display: none;
   }
 
-  .craving_header {
-    padding: 1.5rem 0;
-    font-size: 1.75rem;
-    text-align: center;
-  }
-
   #state_btn_2 {
     background: $red;
     width: 100%;
@@ -196,15 +212,19 @@ html, body, .alpha_wrapper, .new_order {
 
 
 #step3_options {
-  background: $yellow;
+  background: $darkgrey;
+  
+  h2 {
+    font-size: 2rem;
+    color: lighten($yellow, 15%);
+    margin-bottom: 0.75rem;
+  }
 
-  .serving_header, .budget_header, .delivery_header {
-    padding: 1.5rem 0;
-    font-size: 1.75rem;
+  .choice {
     text-align: center;
-    background: $red;
-    color: #fff;
-    margin-top: 17px;
+    color: #FFF;
+    padding: 2rem 1rem;
+    margin: 1rem 1rem 0 1rem;
   }
 
   .select_container {
@@ -236,29 +256,41 @@ html, body, .alpha_wrapper, .new_order {
   }
 
   .click_change {
-    color: #3d566e;
+    &.green {
+      color: lighten($green, 30%);
+    }
+    &.blue {
+      color: lighten($blue, 30%);
+    }
   }
 
   .delivery_header {
-    margin-bottom: 21px;
+    color: $yellow;
+    text-align: center;
+    font-size: 2.2rem;
+    margin: 1.5rem 0;
   }
 
+  .address_inputs {
+    padding: 0 1rem;
+    input[type=text] {
+      margin: 0.2rem 0;
+      padding: 0.25rem;
+      width: 100%;
+    }
+  }
   #state_btn_3 {
     position: relative;
     z-index: 2;
-    margin: 1.5rem;
+    margin: 1.5rem 0;
     padding: 1.5rem;
-    background: $green;
-    border-radius: 10px;
-    text-align: center;
+    background: $red;
+    width: 100%;
+    color: #FFF;
+    font-size: 30px;
     cursor: pointer;
-    font-size: 2rem;
-    text-shadow: 1px 1px 0px darken($green, 10%);
-    border-bottom: 3px solid darken($green, 20%);
-    border-right: 1px solid darken($green, 12%);
-    color: #fff;
+    text-align: center;
   }
-
 }
 
 
@@ -403,4 +435,10 @@ html, body, .alpha_wrapper, .new_order {
 
 
 
+
+@media screen and (min-width: 1024px) {
+  #step3_options .choice {
+    margin: 1rem 0 0 0;
+  }
+}
 
