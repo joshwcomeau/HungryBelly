@@ -82,7 +82,7 @@
             <%= f.select(:servings, options_for_select(
               [ ['1 person', 1], ['2 people', 2], ['3 people', 3], ['4 people', 4], ['5 people', 5], ['6 people', 6] ], 2
             ), class: 'step3_dropdown') %>
-            
+
             <p class="click_change green">Click or tap to change.</p>
           </div>
         </div>
@@ -96,9 +96,9 @@
           </div>
         </div>
       </div>
-      
-     
-    
+
+
+
       <h3 class="delivery_header">Delivery Address</h3>
       <div class="address_inputs">
         <%= f.text_field :first_name, placeholder: 'First Name' %>
@@ -144,11 +144,35 @@
         <p> We just want to make sure we got your order right. <strong>Please review!</strong></p>
 
           <div class="summarize">
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait</p>
-          </div>
+            <div class="input_block">
+              <span class="name_label">Name:</span> <span class="first_input">Ellen</span> <span class="last_input">Lai</span>
+            </div>
+            <div class="input_block">
+              <p class="name_label">Delivery Address:</p>
+                <div class="addy_block">
+                  <p class="street_input">123 Avenue Street</p>
+                  <p class="city_input">Toronto</p>
+                  <p class="postal_input">M1G1N5</p>
+                </div>
+            </div>
+            <div class="input_block">
+              <span class="name_label">Phone:</span> <span class="phone_input">416-777-7777</span>
+            </div>
+            <div class="input_block">
+              <span class="name_label">Email:<span> <span class="email_input">miss.ellenlai@gmail.com</span>
+            </div>
+            <div class="input_block">
+              <span class="name_label">Notes:</span>
+                <div class="notes_block">
+                  I am allergic to onions.
+                </div>
+            </div>
 
-        
+
+            </div>
+
         <input type="submit" value="Feed Me!" id="state_btn_5" class="modalButton button red text-blanco text-shadow-negra feedme">
+
 
       </div>
     </div>
