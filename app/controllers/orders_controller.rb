@@ -1,6 +1,21 @@
 class OrdersController < ApplicationController
   def create    
     @order = Order.new(order_params)
+
+    if params[:cuisines]
+      params[:cuisines].each do |c|
+        if c.last.last == "1"
+          @order.cuisines << Cuisine.find_by(name: c.first)
+        end
+      end
+    end
+
+    if @order.save
+      OrderMailer::send_order(@order)
+      render :thank_you
+    else
+
+    end
   end
 
   private

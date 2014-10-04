@@ -20,7 +20,10 @@
             We're taking orders from 11AM to 9PM, 7 days a week.
           </li>
           <li data-number="3.">
-            For now, we don't take debit or credit cards. Please have cash for the delivery person.
+            For now, we don't take debit or credit cards. <u>Please have cash for the delivery person.</u>
+          </li>
+          <li data-number="4.">
+            Your food should arrive within 60-75 minutes. Right now you cannot order in advance, all orders are assumed to be ASAP.
           </li>
         </ul>
 
@@ -39,12 +42,9 @@
 
   <div id="step2_cuisines" class="step">
     <div class="width_limiter">
-      yeahh
-      <%= f.fields_for :cuisines do |cfield| %>
-        <%= cfield.text_field "Woohoo!" %>
-        <% Cuisine.all.each do |cuisine| %>
-
-          <%= cfield.check_box cuisine.name, {multiple: true, class: 'cuisine_checkbox'}, cuisine.id %>
+      <%= fields_for :cuisines do |cfield| %>
+        <% Cuisine.all.each do |cuisine_box| %>
+          <%= cfield.check_box cuisine_box.name, {multiple: true, class: 'cuisine_checkbox'}, 1, nil %>
         <% end %>
       <% end %>
 
@@ -90,7 +90,7 @@
           <div class="choice bg_blue">
             <h2>What's your budget per serving?</h2>
             <%= f.select(:budget, options_for_select(
-              [ ['$15 - $20', 20], ['$20 - $25', 25], ['$25 - $30', 30], ['$30 - $35', 35] ]
+              [ ['$15 - $20', 20], ['$20 - $25', 25], ['$25 - $30', 30], ['$30 - $35', 35] ], 25
             ), class: 'step3_dropdown') %>
             <p class="click_change blue">Click or tap to change.</p>
           </div>
@@ -104,6 +104,7 @@
         <%= f.text_field :first_name, placeholder: 'First Name' %>
         <%= f.text_field :last_name, placeholder: 'Last Name' %>
         <%= f.text_field :street, placeholder: 'Address' %>
+        <%= f.text_field :city, placeholder: 'City' %>
         <%= f.text_field :postal_code, placeholder: 'Postal Code' %>
         <%= f.text_field :phone, placeholder: 'Phone' %>
         <%= f.text_field :email, placeholder: 'Email Address' %>
@@ -121,15 +122,15 @@
       <div class="notes_container">
         <div class="toknow perc100">Things we should know...</div>
           <div class="notes_text">
-            <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
+            <p class="allergies">Love pasta? Hate pickles? Let us know of any dietary restrictions, allergies, likes and dislikes, and we'll do our best to make sure you get what you want.</p>
 
-            <p class="inform">*We will inform the restaurant of your dietary restrictions, but it cannot be 100% guaranteed.</p>
+            <p class="inform">Note, these customizations are <strong>not guaranteed</strong>. If you have dangerous food allergies, please don't use this service. Sorry =(</p>
 
-            <textarea rows="10" placeholder="(i.e. I am allergic to shrimp!)"></textarea>
+            <%= f.text_area :notes, placeholder: "eg. I'm vegetarian, I hate zucchini, etc", rows: 10 %>
 
           </div>
 
-      <div class="state_btn" id="state_btn_4" data-state-desired="5">On we go!</div>
+      <div class="state_btn" id="state_btn_4" data-state-desired="5">View Order Summary</div>
       </div>
     </div>
   </div>
@@ -147,7 +148,7 @@
           </div>
 
         
-        <input type="submit" value="Feed Me!" id="state_btn_5" data-state-desired="6" class="state_btn modalButton button red text-blanco text-shadow-negra feedme">
+        <input type="submit" value="Feed Me!" id="state_btn_5" class="modalButton button red text-blanco text-shadow-negra feedme">
 
       </div>
     </div>
@@ -248,7 +249,7 @@ $(document).ready(function() {
   var change_state = function() {
     var desired_state = $(this).data('state-desired');
     console.log("We want to go to " + desired_state);
-    History.pushState({state: desired_state}, "State "+desired_state, "?step="+desired_state);
+    History.pushState({state: desired_state}, "HungryBelly Alpha - Step "+desired_state, "?step="+desired_state);
   }
 
   var toggle_cuisine = function() {
@@ -256,12 +257,12 @@ $(document).ready(function() {
 
     if ( cuisines[clicked_cuisine] === true ) {
       $(this).removeClass("selected");
-      $("#cuisines_"+clicked_cuisine).prop("checked", false);
+      $("#cuisines_"+clicked_cuisine+"_1").prop("checked", false);
       cuisines[clicked_cuisine] = false;
       num_of_cuisines--;
     } else {
       $(this).addClass("selected");
-      $("#cuisines_"+clicked_cuisine).prop("checked", true);
+      $("#cuisines_"+clicked_cuisine+"_1").prop("checked", true);
       cuisines[clicked_cuisine] = true;
       num_of_cuisines++;
     }
@@ -276,6 +277,7 @@ $(document).ready(function() {
     if ( selected_servings == '1' ) {
       if ( $("#order_budget").val() == 20 ) {
         $("#order_budget").val(25);
+        alert("Sorry, the minimum budget for a 1-serving order is $20")
       }
       $("#order_budget option:first-child").prop("disabled", true);
 
