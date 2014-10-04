@@ -1,10 +1,10 @@
 class OrderMailer < ActionMailer::Base
-  default from: "hungrybellyapp@gmail.com"
+  default from: ENV['SENDGRID_USERNAME']
 
   def send_order(order)
     @order = order
     mail(
-      to: 'joshwcomeau@gmail.com',
+      to: 'twoequalsone@live.com',
       subject: 'New Order Placed'
     )
   end
