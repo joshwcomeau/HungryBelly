@@ -4,7 +4,7 @@ class OrderMailer < ActionMailer::Base
   def send_order(order)
     @order = order
     mail(
-      to: 'joshwcomeau@gmail.com',
+      to: 'miss.ellenlai@gmail.com',
       subject: 'New Order Placed'
     )
   end
