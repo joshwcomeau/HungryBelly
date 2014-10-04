@@ -7,3 +7,6 @@
 # STRIPE_PUBLIC_KEY: pk_BRgD57O8fHja9HxduJUszhef6jCyS
 ORDRIN_KEY:     N65o9nW8iLKgYXYifxLji7uNdDWl8xENAlMvEB-KD-0
 ORDRIN_SECRET:  NeDTpROHKr0wT6V0pYsdjmxxvKpazxe1W7jg4Pt02PQ
+
+EMAIL_ADDR:     'hungrybellyapp@gmail.com'
+EMAIL_PASS:     'hungryhungryhippos'
