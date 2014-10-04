@@ -5,7 +5,6 @@ class AlphaController < ApplicationController
       name: 'james',
       thing1: 'woohoo!'
     )
-    binding.pry
     render layout: "alpha_application"
   end
 
