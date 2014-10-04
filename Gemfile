@@ -43,6 +43,7 @@ gem 'quiet_assets'
 gem 'figaro'
 gem 'ordrin'
 gem 'area'
+gem 'annotate'
 
 gem 'rest-client'
 

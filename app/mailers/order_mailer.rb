@@ -1,5 +1,5 @@
 class OrderMailer < ActionMailer::Base
-  default from: "HungryBelly <hello@hungrybelly.com>"
+  default from: "hungrybellyapp@gmail.com"
 
   def send_order(order)
     @order = order
