@@ -194,7 +194,7 @@ html, body, .alpha_wrapper, .new_order {
     background-color: $green !important;
   }
   .cuisine_checkbox {
-    display: none;
+    // display: none;
   }
 
   #state_btn_2 {
@@ -304,7 +304,16 @@ html, body, .alpha_wrapper, .new_order {
     .toknow {
       color: #fff;
       font-size: 2rem;
-      margin-bottom: 5px;
+      font-weight: bold;
+      margin-bottom: -0.6rem;
+      text-shadow: 
+        1px 1px 0px $red,
+        -1px 1px 0px $red,
+        2px 2px 0px $red,
+        -2px 2px 0px $red,
+        3px 3px 0px $red,
+        -3px 3px 0px $red,
+        4px 4px 0px $red;
     }
 
     .notes_text{

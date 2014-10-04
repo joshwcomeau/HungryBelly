@@ -39,10 +39,12 @@
 
   <div id="step2_cuisines" class="step">
     <div class="width_limiter">
-      <%= fields_for :cuisines do |cfield| %>
+      yeahh
+      <%= f.fields_for :cuisines do |cfield| %>
+        <%= cfield.text_field "Woohoo!" %>
         <% Cuisine.all.each do |cuisine| %>
 
-          <%= cfield.check_box cuisine.name, {multiple: true, class: 'cuisine_checkbox'}, cuisine.id, nil %>
+          <%= cfield.check_box cuisine.name, {multiple: true, class: 'cuisine_checkbox'}, cuisine.id %>
         <% end %>
       <% end %>
 
@@ -99,12 +101,12 @@
     
       <h3 class="delivery_header">Delivery Address</h3>
       <div class="address_inputs">
-        <input type="text" name="firstname" class="firstname" placeholder="First Name">
-        <input type="text" name="lastname" class="lastname" placeholder="Last Name">
-        <input type="text" name="street" class="street" placeholder="Street">
-        <input type="text" name="postal" class="postal" placeholder="Postal Code">
-        <input type="text" name="phone" class="phone" placeholder="Phone">
-        <input type="text" name="email" class="email" placeholder="Email">
+        <%= f.text_field :first_name, placeholder: 'First Name' %>
+        <%= f.text_field :last_name, placeholder: 'Last Name' %>
+        <%= f.text_field :street, placeholder: 'Address' %>
+        <%= f.text_field :postal_code, placeholder: 'Postal Code' %>
+        <%= f.text_field :phone, placeholder: 'Phone' %>
+        <%= f.text_field :email, placeholder: 'Email Address' %>
       </div>
 
       <div class="state_btn" id="state_btn_3" data-state-desired="4">Submit</div>
@@ -117,7 +119,7 @@
   <div id="step4_notes" class="step">
     <div class="width_limiter">
       <div class="notes_container">
-        <div class="toknow">Things we should know...</div>
+        <div class="toknow perc100">Things we should know...</div>
           <div class="notes_text">
             <p class="allergies"> If you have <strong>allergies*</strong> or any other <strong>food preferences*</strong> <span class="italicize">(i.e. extreme hatred towards pickles, vegetarian, lactose intolerant, etc.)</span>, please let us know!</p>
 
@@ -171,9 +173,6 @@
 
 
 
-
-
-
   <div class="usernotes_container">
 
     <p> If you have allergies* or any other food preferences* (i.e. extreme hatred towards pickles, vegetarian, lactose intolerant etc.), please let us know!</p>
@@ -184,37 +183,12 @@
 
 
   </div>
-
-  <br><br><br>
-
-
-  <div class="summary2_container">
-      <p>- customer order summary</p>
-      <p>- customer notes</p>
-      <p>- feed me button</p>
-  </div>
-
-
-  <br><br><br>
-
-  <div class="final_ty_container">
-      <div class="cs_logo2"><%= render partial: 'logo_sample.svg' %></div>
-      <div class="final_ty_text">
-        <p>Now sit back and let your belly be fed!</p>
-        <p>We hope you enjoy your surprise!</p>
-        <p>Since you're one of our first testers, we would love to hear your feedback!</p>
-
-
-         <p>If you think your food got lost (more than 45 minute wait time), have no fear! Call Ellen and she will get it fixed right away! 647-298-8996.
-      </div>
-  </div>
-
-
 </div>
 <% end %>
 
 <script>
 $(document).ready(function() {
+  History.pushState({state: 1}, "State 1", "?step=1");
   var
   current_state = 1,
   states = {
@@ -235,11 +209,16 @@ $(document).ready(function() {
   },
   num_of_cuisines = 0;
 
-  var change_state = function() {
-    var desired_state = $(this).data('state-desired');
+  $(".perc100").percentext();
 
+  History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+    var new_state = History.getState(), // Note: We are using History.getState() instead of event.state
+        new_state_num = new_state.data.state;
+
+    console.log(new_state_num);
+    
     // Are we going FORWARD through the app?
-    if ( desired_state > current_state ) {
+    if ( new_state_num > current_state ) {
       _.each(states, function(value, key) {
         if ( value === current_state ) {
           var offset = "-" + $(window).height() + "px";
@@ -249,8 +228,27 @@ $(document).ready(function() {
         }
       });
 
-      current_state = desired_state;
+      // Update the browser nav
+      
+    } else if ( current_state > new_state_num ) {
+      _.each(states, function(value, key) {
+        if ( value === new_state_num ) {
+          $(key).animate({
+            marginTop: 0
+          }, 1000);
+        }
+      });
     }
+
+    current_state = new_state_num;
+
+  });
+
+
+  var change_state = function() {
+    var desired_state = $(this).data('state-desired');
+    console.log("We want to go to " + desired_state);
+    History.pushState({state: desired_state}, "State "+desired_state, "?step="+desired_state);
   }
 
   var toggle_cuisine = function() {
@@ -268,11 +266,8 @@ $(document).ready(function() {
       num_of_cuisines++;
     }
 
-    if (num_of_cuisines > 0) {
-      $("#state_btn_2").text("Lock In Selection");
-    } else {
-      $("#state_btn_2").text("I'm Not Picky");
-    }
+    num_of_cuisines > 0 ? $("#state_btn_2").text("Lock In Selection") : $("#state_btn_2").text("I'm Not Picky");
+    
   };
 
   var toggle_price_disable = function() {
