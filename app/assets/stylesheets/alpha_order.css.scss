@@ -9,6 +9,18 @@ html, body, .alpha_wrapper, .new_order {
 .yellow {
   color: $yellow;
 }
+.red {
+  color: $red;
+}
+.green {
+  color: $green;
+}
+.blue {
+  color: $blue;
+}
+.darkblue {
+  color: darken($blue, 15%);
+}
 
 .bg_green {
   background-color: $green;
@@ -374,7 +386,32 @@ html, body, .alpha_wrapper, .new_order {
 
 
 #step5_confirmation {
-  background: #ded9d2;
+  background: $yellow;
+
+  h2 {
+    font-size: 3rem;
+    background: $blue;
+    color: #FFF;
+    text-align: center;
+    padding: 1.5rem 0;
+    font-weight: bold;
+  }
+
+  .grid {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-bottom: 1px dotted $blue;
+  }
+  
+  #cuisines_summary_ul li {
+    display: inline-block;
+    padding: 0.5rem;
+    background: darken($green, 10%);
+    color: #FFF;
+    font-size: 0.75em;
+    margin-right: 0.25rem;
+    border-radius: 3px;
+  }
 
   .summary1_container {
     padding: 20px 15px;
@@ -392,7 +429,7 @@ html, body, .alpha_wrapper, .new_order {
   }
 
   .summarize {
-    background: #fff;
+    background: $lightgrey;
     margin: 20px 0px;
     padding: 15px 10px;
     border-radius: 9px;
@@ -465,7 +502,7 @@ html, body, .alpha_wrapper, .new_order {
 
     .enjoy {
       font-size: 2.8rem;
-      color: #34495e;
+      color: $green;
       font-weight: bold;
       margin-top: 20px;
     }

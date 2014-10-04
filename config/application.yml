@@ -10,3 +10,6 @@ ORDRIN_SECRET:  NeDTpROHKr0wT6V0pYsdjmxxvKpazxe1W7jg4Pt02PQ
 
 EMAIL_ADDR:     'hungrybellyapp@gmail.com'
 EMAIL_PASS:     'hungryhungryhippos'
+
+SENDGRID_USERNAME: 'app26763581@heroku.com'
+SENDGRID_PASSWORD: 'rhlbbapt'

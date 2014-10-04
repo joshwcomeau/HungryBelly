@@ -81,7 +81,7 @@
             <h2>How many servings would you like?</h2>
             <%= f.select(:servings, options_for_select(
               [ ['1 person', 1], ['2 people', 2], ['3 people', 3], ['4 people', 4], ['5 people', 5], ['6 people', 6] ], 2
-            ), class: 'step3_dropdown') %>
+            ), {}, class: 'step3_dropdown order_input') %>
 
             <p class="click_change green">Click or tap to change.</p>
           </div>
@@ -91,7 +91,7 @@
             <h2>What's your budget per serving?</h2>
             <%= f.select(:budget, options_for_select(
               [ ['$15 - $20', 20], ['$20 - $25', 25], ['$25 - $30', 30], ['$30 - $35', 35] ], 25
-            ), class: 'step3_dropdown') %>
+            ), {}, class: 'step3_dropdown order_input') %>
             <p class="click_change blue">Click or tap to change.</p>
           </div>
         </div>
@@ -101,13 +101,13 @@
 
       <h3 class="delivery_header">Delivery Address</h3>
       <div class="address_inputs">
-        <%= f.text_field :first_name, placeholder: 'First Name' %>
-        <%= f.text_field :last_name, placeholder: 'Last Name' %>
-        <%= f.text_field :street, placeholder: 'Address' %>
-        <%= f.text_field :city, placeholder: 'City' %>
-        <%= f.text_field :postal_code, placeholder: 'Postal Code' %>
-        <%= f.text_field :phone, placeholder: 'Phone' %>
-        <%= f.text_field :email, placeholder: 'Email Address' %>
+        <%= f.text_field :first_name, placeholder: 'First Name', class: 'order_input' %>
+        <%= f.text_field :last_name, placeholder: 'Last Name', class: 'order_input' %>
+        <%= f.text_field :street, placeholder: 'Address', class: 'order_input' %>
+        <%= f.text_field :city, placeholder: 'City', class: 'order_input' %>
+        <%= f.text_field :postal_code, placeholder: 'Postal Code', class: 'order_input' %>
+        <%= f.text_field :phone, placeholder: 'Phone', class: 'order_input' %>
+        <%= f.text_field :email, placeholder: 'Email Address', class: 'order_input' %>
       </div>
 
       <div class="state_btn" id="state_btn_3" data-state-desired="4">Submit</div>
@@ -126,7 +126,7 @@
 
             <p class="inform">Note, these customizations are <strong>not guaranteed</strong>. If you have dangerous food allergies, please don't use this service. Sorry =(</p>
 
-            <%= f.text_area :notes, placeholder: "eg. I'm vegetarian, I hate zucchini, etc", rows: 10 %>
+            <%= f.text_area :notes, placeholder: "eg. I'm vegetarian, I hate zucchini, etc", class: 'order_input', rows: 10 %>
 
           </div>
 
@@ -138,38 +138,65 @@
 
   <div id="step5_confirmation" class="step">
     <div class="width_limiter">
-      <div class="last_thing">Oh, one last thing...</div>
-        <div class="summary1_container">
+      <h2>Let's Review</h2>
+      <div class="summary1_container">
 
         <p> We just want to make sure we got your order right. <strong>Please review!</strong></p>
 
-          <div class="summarize">
-            <div class="input_block">
-              <span class="name_label">Name:</span> <span class="first_input">Ellen</span> <span class="last_input">Lai</span>
+        <div class="summarize">
+          <div class="grid">
+            <div class="c3">
+              <span class="name_label">Name:</span>
             </div>
-            <div class="input_block">
-              <p class="name_label">Delivery Address:</p>
-                <div class="addy_block">
-                  <p class="street_input">123 Avenue Street</p>
-                  <p class="city_input">Toronto</p>
-                  <p class="postal_input">M1G1N5</p>
-                </div>
+            <div class="c9">
+              <span id="order_first_name_summary"></span> <span id="order_last_name_summary"></span> 
             </div>
-            <div class="input_block">
-              <span class="name_label">Phone:</span> <span class="phone_input">416-777-7777</span>
+          </div>
+          <div class="grid">
+            <div class="c3">
+              <span class="name_label">Deliver To:</span>
             </div>
-            <div class="input_block">
-              <span class="name_label">Email:<span> <span class="email_input">miss.ellenlai@gmail.com</span>
+            <div class="c9">
+              <p id="order_street_summary"></p>
+              <p id="order_city_summary"></p>
+              <p id="order_postal_code_summary"></p>
             </div>
-            <div class="input_block">
+          </div>
+          <div class="grid">
+            <div class="c3">
+              <span class="name_label">Contact:</span>
+            </div>
+            <div class="c9">
+              <p id="order_email_summary"></p>
+              <p id="order_phone_summary"></p>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="c3">
+              <span class="name_label">Order:</span>
+            </div>
+            <div class="c9">
+              <p id="not_picky_summary">
+                No specific cuisines selected.
+              </p>
+              <p id="locked_in_summary" style="display: none;">
+                <ul id="cuisines_summary_ul">
+                  
+                </ul>
+              </p>
+              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">2</span> servings, up to $<span id="order_budget_summary">25</span>/serving</p>
+              <p style="margin-top: 0.25rem;"><strong class="darkblue">Total budget:</strong> $<span id="total_budget"></span>.00</p>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="c3">
               <span class="name_label">Notes:</span>
-                <div class="notes_block">
-                  I am allergic to onions.
-                </div>
             </div>
-
-
+            <div class="c9">
+              <span id="order_notes_summary"></span>
             </div>
+          </div>
+        </div>
 
         <input type="submit" value="Feed Me!" id="state_btn_5" class="modalButton button red text-blanco text-shadow-negra feedme">
 
@@ -239,8 +266,6 @@ $(document).ready(function() {
   History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
     var new_state = History.getState(), // Note: We are using History.getState() instead of event.state
         new_state_num = new_state.data.state;
-
-    console.log(new_state_num);
     
     // Are we going FORWARD through the app?
     if ( new_state_num > current_state ) {
@@ -269,6 +294,32 @@ $(document).ready(function() {
 
   });
 
+  var update_summary = function(field) {
+    var field_id, field_val, summary_id;
+    
+    // Update the field in question
+    field_id    = $(field).attr("id");
+    field_val   = $(field).val();
+    summary_id  = "#" + field_id + "_summary";
+
+    $(summary_id).text( field_val );
+
+
+  };
+
+
+  var get_total_budget = function() {
+    return ( $("#order_servings").val() * $("#order_budget").val() );
+  };
+
+  var populate_summary = function() {
+    $(".order_input").on("change", function() {
+      update_summary(this);
+      $("#total_budget").html(get_total_budget());
+    });
+  };
+
+  populate_summary();
 
   var change_state = function() {
     var desired_state = $(this).data('state-desired');
@@ -278,6 +329,7 @@ $(document).ready(function() {
 
   var toggle_cuisine = function() {
     var clicked_cuisine = $(this).text();
+    var c_list = "";
 
     if ( cuisines[clicked_cuisine] === true ) {
       $(this).removeClass("selected");
@@ -291,7 +343,22 @@ $(document).ready(function() {
       num_of_cuisines++;
     }
 
-    num_of_cuisines > 0 ? $("#state_btn_2").text("Lock In Selection") : $("#state_btn_2").text("I'm Not Picky");
+    if (num_of_cuisines > 0) {
+      $("#state_btn_2").text("Lock In Selection");
+      $("#not_picky_summary").hide();
+      $("#locked_in_summary").show();
+      Object.keys(cuisines).forEach(function(key) {
+        if ( cuisines[key] ) {
+          c_list += "<li>"+key+"</li>";
+        }
+      });
+    } else {
+      $("#state_btn_2").text("I'm Not Picky");
+      $("#not_picky_summary").show();
+      $("#locked_in_summary").hide();
+    }
+    
+    $("#cuisines_summary_ul").html(c_list);
     
   };
 

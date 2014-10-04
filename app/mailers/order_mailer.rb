@@ -1,8 +1,8 @@
 class OrderMailer < ActionMailer::Base
-  default from: "\"#paid\" <hello@hashtagpaid.com>"
+  default from: "HungryBelly <#{ENV['SENDGRID_USERNAME']}>"
 
-  def send_order
-    @order = { servings: 5, budget: 25 }
+  def send_order(order)
+    @order = order
     mail(
       to: 'joshwcomeau@gmail.com',
       subject: 'New Order Placed'

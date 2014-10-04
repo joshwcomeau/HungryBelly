@@ -1,5 +1,38 @@
-Hey,
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>We got a new order!</h1>
+    <p><strong>Order time:</strong> <%= @order.created_at.strftime("%H:%M on %b %d") %></p>
+    <p>
+      <strong>Name:</strong> <%= @order.try(:first_name) %> <%= @order.try(:last_name) %><br><br>
+      <strong>Phone:</strong> <%= @order.try(:phone) %><br>
+      <strong>Email:</strong> <%= @order.try(:email) %><br>
+      <strong>Address:</strong><br>
+      <%= @order.try(:street) %> <br>
+      <%= @order.try(:city) %>, Ontario<br>
+      <%= @order.try(:postal_code) %>
+    </p>
+    
+    <h3>Order details:</h3>
+    <p>
+      <% if @order.cuisines.any? %>
+        <strong>Cuisine(s):</strong> <br>
+        <% @order.cuisines.each do |c| %>
+          <%= c.name %><br>
+        <% end %>
+        <br>
+      <% else %>
+        <strong>Cuisine(s):</strong> Not Picky<br><br>
+      <% end %>
 
-This order was just submitted:
+      <strong>Servings:</strong> <%= @order.servings %><br>
+      <strong>Max Budget Per Serving:</strong> <%= number_to_currency @order.budget %><br>
+      <strong>Total Budget:</strong> <%= number_to_currency(@order.servings * @order.budget) %>
+    </p>
 
-<%= @order.to_yaml %>
+    <strong>Notes:</strong> <%= @order.try(:notes) %>
+  </body>
+</html>
