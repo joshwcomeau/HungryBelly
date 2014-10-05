@@ -80,7 +80,7 @@
           <div class="choice bg_green">
             <h2>How many servings would you like?</h2>
             <%= f.select(:servings, options_for_select(
-              [ ['1 serving', 1], ['2 servings', 2], ['3 servings', 3], ['4 servings', 4], ['5 servings', 5], ['6 servings', 6] ], 2
+              [ ['1 serving', 1], ['2 servings', 2], ['3 servings', 3], ['4 servings', 4], ['5 servings', 5], ['6 servings', 6] ], 1
             ), {}, class: 'step3_dropdown order_input') %>
 
             <p class="click_change green">Click or tap to change.</p>
@@ -88,9 +88,9 @@
         </div>
         <div class="c6">
           <div class="choice bg_blue">
-            <h2>What's your budget per serving?</h2>
+            <h2>How much are you willing to spend?</h2>
             <%= f.select(:budget, options_for_select(
-              [ ['$15 - $20', 20], ['$20 - $25', 25], ['$25 - $30', 30], ['$30 - $35', 35] ], 25
+              [ ['$20', 20], ['$25', 25], ['$30', 30], ['$35', 35] ], 25
             ), {}, class: 'step3_dropdown order_input') %>
             <p class="click_change blue">Click or tap to change.</p>
           </div>
@@ -224,12 +224,12 @@ $(document).ready(function() {
   var
   current_state = 1,
   states = {
-    '#step1_intro':      1,
-    '#step2_cuisines':   2,
-    '#step3_options':    3,
-    '#step4_notes':      4,
-    '#step5_confirmation': 5,
-    '#step6_thankyou': 6
+    '#step1_intro':         1,
+    '#step2_cuisines':      2,
+    '#step3_options':       3,
+    '#step4_notes':         4,
+    '#step5_confirmation':  5,
+    '#step6_thankyou':      6
   },
   cuisines = {
     'Indian':     false,
@@ -239,7 +239,15 @@ $(document).ready(function() {
     'Greek':      false,
     'Italian':    false
   },
-  num_of_cuisines = 0;
+  num_of_cuisines = 0,
+  price_list,
+  price_list_1,
+  price_list_2,
+  price_list_3,
+  price_list_4,
+  price_list_5,
+  price_list_6,
+  list_of_price_lists;
 
   $(".perc100").percentext();
 
@@ -354,22 +362,85 @@ $(document).ready(function() {
     
   };
 
-  var toggle_price_disable = function() {
-    var selected_servings = $(this).val();
-
-    if ( selected_servings == '1' ) {
-      if ( $("#order_budget").val() == 20 ) {
-        $("#order_budget").val(25);
-        alert("Sorry, the minimum budget for a 1-serving order is $20")
-      }
-      $("#order_budget option:first-child").prop("disabled", true);
-
-    } else {
-      $("#order_budget option:first-child").prop("disabled", false);
+  var get_min_and_max_prices = function(servings) {
+    var range_start, range_stop;
+    
+    switch(servings) {
+      case 1:
+        range_start = 20;
+        range_stop  = 45;
+        break;
+      case 2:
+        range_start = 30;
+        range_stop  = 70;
+        break;
+      case 3:
+        range_start = 45;
+        range_stop  = 90;
+        break;
+      case 4:
+        range_start = 55;
+        range_stop  = 110;
+        break;
+      case 5:
+        range_start = 65;
+        range_stop  = 130;
+        break;
+      case 6:
+        range_start = 75;
+        range_stop  = 150;
+        break;
     }
+
+    return [ range_start, range_stop ];
+  }
+
+  var get_html_option_list_for_prices = function(prices) {
+    return prices.map(function(value, index, arr) {
+      return '<option value="' + value + '">$' + value + '</option>'
+    }).join("");
+  }
+
+  var get_appropriate_prices_for_servings = function(servings) {
+    var p_range, range_start, range_stop, prices;
+
+    p_range     = get_min_and_max_prices(servings);
+    range_start = p_range[0];
+    range_stop  = p_range[1];
+
+    prices = build_price_array(range_start, range_stop);
+
+    return get_html_option_list_for_prices(prices);
+
+  }
+
+  var build_price_array = function(min_price, max_price) {
+    var prices = [];
+    for ( i=min_price; i<=max_price; i+=5 ) {
+      prices.push(i);
+    }  
+
+    return prices;
+  }
+
+  price_list   = build_price_array(25, 160);
+  price_list_1 = get_appropriate_prices_for_servings(1, price_list);
+  price_list_2 = get_appropriate_prices_for_servings(2, price_list);
+  price_list_3 = get_appropriate_prices_for_servings(3, price_list);
+  price_list_4 = get_appropriate_prices_for_servings(4, price_list);
+  price_list_5 = get_appropriate_prices_for_servings(5, price_list);
+  price_list_6 = get_appropriate_prices_for_servings(6, price_list);
+  list_of_price_lists = [null, price_list_1, price_list_2, price_list_3, price_list_4, price_list_5, price_list_6, ]
+
+
+  var toggle_prices = function() {
+    var num_servings = $(this).val();    
+    $("#order_budget").html( list_of_price_lists[num_servings] );
   };
 
-  $("#order_servings").on("change", toggle_price_disable);
+
+
+  $("#order_servings").on("change", toggle_prices)
 
   $(".state_btn").on("click", change_state);
   $(".cat_btn").on("click", toggle_cuisine);
