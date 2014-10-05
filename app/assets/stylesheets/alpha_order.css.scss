@@ -78,8 +78,8 @@ html, body, .alpha_wrapper, .new_order {
     background: #3498db;
     margin: 6rem 1.5rem 0 1.5rem;
     padding: 1.8rem 1rem 1rem 1rem;
-    border-bottom: 3px solid darken($blue, 20%);
-    border-right: 1px solid darken($blue, 12%);
+    // border-bottom: 3px solid darken($blue, 20%);
+    // border-right: 1px solid darken($blue, 12%);
 
     h3 {
       font-size: 1.6rem;
@@ -138,8 +138,8 @@ html, body, .alpha_wrapper, .new_order {
     cursor: pointer;
     font-size: 2rem;
     text-shadow: 1px 1px 0px darken($green, 10%);
-    border-bottom: 3px solid darken($green, 20%);
-    border-right: 1px solid darken($green, 12%);
+    // border-bottom: 3px solid darken($green, 20%);
+    // border-right: 1px solid darken($green, 12%);
   }
 
 
@@ -313,6 +313,7 @@ html, body, .alpha_wrapper, .new_order {
   strong {
     color: $red;
   }
+
   .notes_container {
     margin: 30px 15px;
 
@@ -375,8 +376,8 @@ html, body, .alpha_wrapper, .new_order {
     cursor: pointer;
     font-size: 2rem;
     text-shadow: 1px 1px 0px darken($yellow, 10%);
-    border-bottom: 3px solid darken($yellow, 20%);
-    border-right: 1px solid darken($yellow, 12%);
+    // border-bottom: 3px solid darken($yellow, 20%);
+    // border-right: 1px solid darken($yellow, 12%);
     color: #fff;
   }
 

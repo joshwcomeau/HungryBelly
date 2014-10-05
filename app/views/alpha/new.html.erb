@@ -50,7 +50,7 @@
 
       <div class="cuisine_container">
         <h2>What are you Craving?</h2>
-        <h4>Click all that apply.</h4>
+        <h4>Click all that apply. We'll select one at random.</h4>
         <div class="grid">
           <div class="c6-s">
             <div class="cat_btn">Indian</div>
@@ -184,8 +184,8 @@
                   
                 </ul>
               </p>
-              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">2</span> servings, up to $<span id="order_budget_summary">25</span>/serving</p>
-              <p style="margin-top: 0.25rem;"><strong class="darkblue">Total budget:</strong> $<span id="total_budget"></span>.00</p>
+              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">2</span> servings, $<span id="order_budget_summary">25</span> budget</p>
+              <p style="margin-top: 0.25rem; font-size: 0.8em; color: #555;">$<small id="budget_per_serving"></small> per serving.</p>
             </div>
           </div>
           <div class="grid">
@@ -308,24 +308,53 @@ $(document).ready(function() {
   };
 
 
-  var get_total_budget = function() {
-    return ( $("#order_servings").val() * $("#order_budget").val() );
+  var get_budget_per_serving = function() {
+    return ( $("#order_budget").val() / $("#order_servings").val() ).toFixed(2);
   };
 
   var populate_summary = function() {
     $(".order_input").on("change", function() {
       update_summary(this);
-      $("#total_budget").html(get_total_budget());
+      $("#budget_per_serving").html(get_budget_per_serving());
     });
   };
 
   populate_summary();
 
+  var validate_address = function() {
+    var 
+    invalid_fields = [],
+    required_fields = [
+      "#order_first_name", "#order_last_name", "#order_street", 
+      "#order_city", "#order_postal_code", "#order_phone", "#order_email"
+    ];
+
+    invalid_fields = required_fields.filter(function(field) {
+      return $(field).val() === '';
+    });
+
+    return invalid_fields.length === 0
+
+  };
+
   var change_state = function() {
+    var valid_form;
     var desired_state = $(this).data('state-desired');
-    console.log("We want to go to " + desired_state);
+    
+    // Deal with validations
+    if ( desired_state === 4 ) {
+      // This is the step where we submit our delivery address. We need to make sure required fields are filled in
+      // before allowing the user to proceed.
+      valid_form = validate_address();
+      if ( !valid_form ) { 
+        alert("Please give us your full delivery address! We need every field.")
+        return false;
+      }
+    }
+
+    // Gogogo!
     History.pushState({state: desired_state}, "HungryBelly Alpha - Step "+desired_state, "?step="+desired_state);
-  }
+  };
 
   var toggle_cuisine = function() {
     var clicked_cuisine = $(this).text();
