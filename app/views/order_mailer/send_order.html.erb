@@ -6,6 +6,7 @@
   <body>
     <h1>We got a new order!</h1>
     <p><strong>Order time:</strong> <%= @order.created_at.strftime("%H:%M on %b %d") %></p>
+    <p><strong>Order ID:</strong> <%= @order.id %></p>
     <p>
       <strong>Name:</strong> <%= @order.try(:first_name) %> <%= @order.try(:last_name) %><br><br>
       <strong>Phone:</strong> <%= @order.try(:phone) %><br>
