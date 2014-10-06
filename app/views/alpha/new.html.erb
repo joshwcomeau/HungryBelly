@@ -106,7 +106,7 @@
         <%= f.text_field :street, placeholder: 'Address', class: 'order_input tab_allowed' %>
         <%= f.text_field :city, placeholder: 'City', class: 'order_input tab_allowed' %>
         <%= f.text_field :postal_code, placeholder: 'Postal Code', class: 'order_input tab_allowed' %>
-        <%= f.text_field :phone, placeholder: 'Phone', class: 'order_input tab_allowed' %>
+        <%= f.text_field :phone, placeholder: 'Phone', class: 'phone order_input tab_allowed' %>
         <%= f.text_field :email, placeholder: 'Email Address', class: 'order_input' %>
       </div>
 
@@ -149,7 +149,7 @@
               <span class="name_label">Name:</span>
             </div>
             <div class="c9">
-              <span id="order_first_name_summary"></span> <span id="order_last_name_summary"></span> 
+              <span id="order_first_name_summary"></span> <span id="order_last_name_summary"></span>
             </div>
           </div>
           <div class="grid">
@@ -181,7 +181,7 @@
               </p>
               <p id="locked_in_summary" style="display: none;">
                 <ul id="cuisines_summary_ul">
-                  
+
                 </ul>
               </p>
               <p style="margin-top: 0.4rem;"><span id="order_servings_summary">1</span> serving(s), $<span id="order_budget_summary">25</span> budget</p>
@@ -256,7 +256,7 @@ $(document).ready(function() {
   History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
     var new_state = History.getState(), // Note: We are using History.getState() instead of event.state
         new_state_num = new_state.data.state;
-    
+
     // Are we going FORWARD through the app?
     if ( new_state_num > current_state ) {
       _.each(states, function(value, key) {
@@ -296,7 +296,7 @@ $(document).ready(function() {
 
   var update_summary = function(field) {
     var field_id, field_val, summary_id;
-    
+
     // Update the field in question
     field_id    = $(field).attr("id");
     field_val   = $(field).val();
@@ -317,10 +317,10 @@ $(document).ready(function() {
   });
 
   var validate_address = function() {
-    var 
+    var
     invalid_fields = [],
     required_fields = [
-      "#order_first_name", "#order_last_name", "#order_street", 
+      "#order_first_name", "#order_last_name", "#order_street",
       "#order_city", "#order_postal_code", "#order_phone", "#order_email"
     ];
 
@@ -329,32 +329,50 @@ $(document).ready(function() {
     });
 
     return invalid_fields.length === 0
-
   };
+
+  // var validate_phoneno = function() {
+  //  $('#order_phone').val().length < 10;
+  // };
+
+   function validate_phoneno () {
+    if ($('#order_phone').val().length < 10) {
+      return "invalid"
+    } else {
+      return "valid"
+    }
+  }
 
   var change_state = function() {
     var valid_form;
     var desired_state = $(this).data('state-desired');
-    
+
+
     // Deal with validations
     if ( desired_state === 4 ) {
       // This is the step where we submit our delivery address. We need to make sure required fields are filled in
       // before allowing the user to proceed.
-      valid_form = validate_address();
-      if ( !valid_form ) { 
+      valid_phone = validate_phoneno();
+      valid_form  = validate_address();
+      if ( valid_phone == "invalid" ) {
+        alert("We need your full phone number with area code! (eg. 4168770000)")
+        return false;
+      } else if ( !valid_form ) {
         alert("Please give us your full delivery address! We need every field.")
         return false;
       } else {
-        // Is it valid? Update our summary budget, since this can change silently
+        // Update our summary budget, since this can change silently
         update_summary( $("#order_budget").get(0) );
         $("#budget_per_serving").html(get_budget_per_serving());
-
       }
-    }
 
+    }
     // Gogogo!
-    History.pushState({state: desired_state}, "HungryBelly Alpha - Step "+desired_state, "?step="+desired_state);
+    History.pushState(
+      {state: desired_state}, "HungryBelly Alpha - Step "+desired_state, "?step="+desired_state
+    );
   };
+
 
   var toggle_cuisine = function() {
     var clicked_cuisine = $(this).text();
@@ -386,14 +404,14 @@ $(document).ready(function() {
       $("#not_picky_summary").show();
       $("#locked_in_summary").hide();
     }
-    
+
     $("#cuisines_summary_ul").html(c_list);
-    
+
   };
 
   var get_min_and_max_prices = function(servings) {
     var range_start, range_stop;
-    
+
     switch(servings) {
       case 1:
         range_start = 20;
@@ -438,7 +456,7 @@ $(document).ready(function() {
     range_stop  = p_range[1];
 
     prices = build_price_array(range_start, range_stop);
- 
+
     return get_html_option_list_for_prices(prices);
 
   }
@@ -447,7 +465,7 @@ $(document).ready(function() {
     var prices = [];
     for ( i=min_price; i<=max_price; i+=5 ) {
       prices.push(i);
-    }  
+    }
 
     return prices;
   }
@@ -463,7 +481,7 @@ $(document).ready(function() {
 
 
   var toggle_prices = function() {
-    var num_servings = $(this).val();    
+    var num_servings = $(this).val();
     $("#order_budget").html( list_of_price_lists[num_servings] );
   };
 
@@ -474,4 +492,24 @@ $(document).ready(function() {
   $(".state_btn").on("click", change_state);
   $(".cat_btn").on("click", toggle_cuisine);
 });
+
+$('.phone').keyup(function () {
+    this.value = this.value.replace(/[^0-9\.]/g,'');
+     var _this = this, maxlength = 30;
+     setTimeout(function(){
+         if(_this.value.length > maxlength){
+            _this.value = _this.value.substr(0,maxlength);
+         }
+     },1);
+    // setTimeout(function(){
+    //      if(_this.value.length < 10){
+    //       alert('We need your full phone number with area code! (eg. 416-555-5555)');
+    //     }
+    //  },8000);
+});
+
+
+
+
+
 </script>
