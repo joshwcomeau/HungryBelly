@@ -31,7 +31,7 @@
 
       <strong>Servings:</strong> <%= @order.servings %><br>
       <strong>Max Budget Per Serving:</strong> <%= number_to_currency @order.budget %><br>
-      <strong>Total Budget:</strong> <%= number_to_currency(@order.servings * @order.budget) %>
+      <strong>Total Budget:</strong> <%= number_to_currency(@order.budget) %>
     </p>
 
     <strong>Notes:</strong> <%= @order.try(:notes) %>

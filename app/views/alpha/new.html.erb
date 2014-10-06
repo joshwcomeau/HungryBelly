@@ -184,8 +184,8 @@
                   
                 </ul>
               </p>
-              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">2</span> servings, $<span id="order_budget_summary">25</span> budget</p>
-              <p style="margin-top: 0.25rem; font-size: 0.8em; color: #555;">$<small id="budget_per_serving"></small> per serving.</p>
+              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">1</span> serving(s), $<span id="order_budget_summary">25</span> budget</p>
+              <p style="margin-top: 0.25rem; font-size: 0.8em; color: #555;">$<small id="budget_per_serving">12.50</small> per serving.</p>
             </div>
           </div>
           <div class="grid">
@@ -307,6 +307,8 @@ $(document).ready(function() {
 
 
   var get_budget_per_serving = function() {
+    console.log($("#order_budget").val() );
+    console.log($("#order_servings").val());
     return ( $("#order_budget").val() / $("#order_servings").val() ).toFixed(2);
   };
 
