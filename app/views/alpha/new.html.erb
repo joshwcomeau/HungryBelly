@@ -303,8 +303,6 @@ $(document).ready(function() {
     summary_id  = "#" + field_id + "_summary";
 
     $(summary_id).text( field_val );
-
-
   };
 
 
@@ -312,14 +310,9 @@ $(document).ready(function() {
     return ( $("#order_budget").val() / $("#order_servings").val() ).toFixed(2);
   };
 
-  var populate_summary = function() {
-    $(".order_input").on("change", function() {
-      update_summary(this);
-      $("#budget_per_serving").html(get_budget_per_serving());
-    });
-  };
-
-  populate_summary();
+  $(".order_input").on("change", function() {
+    update_summary(this);
+  });
 
   var validate_address = function() {
     var 
@@ -349,6 +342,11 @@ $(document).ready(function() {
       if ( !valid_form ) { 
         alert("Please give us your full delivery address! We need every field.")
         return false;
+      } else {
+        // Is it valid? Update our summary budget, since this can change silently
+        update_summary( $("#order_budget").get(0) );
+        $("#budget_per_serving").html(get_budget_per_serving());
+
       }
     }
 
@@ -438,7 +436,7 @@ $(document).ready(function() {
     range_stop  = p_range[1];
 
     prices = build_price_array(range_start, range_stop);
-
+ 
     return get_html_option_list_for_prices(prices);
 
   }
