@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
-      # OrderMailer.send_order(@order).deliver
+      OrderMailer.send_order(@order).deliver
       render :thank_you
     else
 
