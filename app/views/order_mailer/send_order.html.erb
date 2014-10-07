@@ -16,7 +16,7 @@
       <%= @order.try(:city) %>, Ontario<br>
       <%= @order.try(:postal_code) %>
     </p>
-    
+
     <h3>Order details:</h3>
     <p>
       <% if @order.cuisines.any? %>
@@ -30,7 +30,7 @@
       <% end %>
 
       <strong>Servings:</strong> <%= @order.servings %><br>
-      <strong>Max Budget Per Serving:</strong> <%= number_to_currency @order.budget %><br>
+      <strong>Max Budget Per Serving:</strong> <%= number_to_currency(@order.budget/@order.servings) %><br>
       <strong>Total Budget:</strong> <%= number_to_currency(@order.budget) %>
     </p>
 
