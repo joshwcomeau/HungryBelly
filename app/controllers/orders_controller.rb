@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  def create
+  def create    
     @order = Order.new(order_params)
 
     if params[:cuisines]
@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
 
     end
   end
-
 
   private
   def order_params
