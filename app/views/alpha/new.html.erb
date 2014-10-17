@@ -96,7 +96,13 @@
           </div>
         </div>
       </div>
-
+  
+      <div class="choice bg_red">
+        <h2>Would you like drinks with your order?</h2>
+        <%= f.select(:drinks, options_for_select(
+              [ ['Yeah, sure!', true], ['Nope', false] ]
+            ), {}, class: 'step3_dropdown drink_input') %>
+      </div>
 
 
       <h3 class="delivery_header">Delivery Address</h3>
@@ -184,7 +190,7 @@
 
                 </ul>
               </p>
-              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">1</span> serving(s), $<span id="order_budget_summary">25</span> budget</p>
+              <p style="margin-top: 0.4rem;"><span id="order_servings_summary">1</span> serving(s), <span id="drink_note_in_summary">with drinks. </span>$<span id="order_budget_summary">25</span> budget</p>
               <p style="margin-top: 0.25rem; font-size: 0.8em; color: #555;">$<small id="budget_per_serving">12.50</small> per serving.</p>
             </div>
           </div>
@@ -307,8 +313,6 @@ $(document).ready(function() {
 
 
   var get_budget_per_serving = function() {
-    console.log($("#order_budget").val() );
-    console.log($("#order_servings").val());
     return ( $("#order_budget").val() / $("#order_servings").val() ).toFixed(2);
   };
 
@@ -335,11 +339,19 @@ $(document).ready(function() {
   //  $('#order_phone').val().length < 10;
   // };
 
-   function validate_phoneno () {
+   function validate_phoneno() {
     if ($('#order_phone').val().length < 10) {
       return "invalid"
     } else {
       return "valid"
+    }
+  }
+
+  function update_drinks() {
+    if ( $(".drink_input").val() === 'true' ) {
+      $("#drink_note_in_summary").show();
+    } else {
+      $("#drink_note_in_summary").hide();
     }
   }
 
@@ -364,6 +376,7 @@ $(document).ready(function() {
         // Update our summary budget, since this can change silently
         update_summary( $("#order_budget").get(0) );
         $("#budget_per_serving").html(get_budget_per_serving());
+        update_drinks();
       }
 
     }
