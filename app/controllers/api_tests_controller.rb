@@ -7,8 +7,8 @@ class ApiTestsController < ApplicationController
   end
 
   def create
-    zip   = "10036"
-    addr  = '1540 Broadway'
+    zip   = "94118"
+    addr  = '2350 Turk St.'
     city  = zip.to_region(:city => true)
     state = zip.to_region(:state => true)
 
@@ -19,11 +19,11 @@ class ApiTestsController < ApplicationController
       zip:      zip
     }
 
-    cuisines = params["cuisines"]
+    cuisines = ["Sushi"]
 
-    budget_low = params["lower"].to_i
-    budget_high = params["upper"].to_i
-    servings = params["servings"].to_i
+    budget_low  = 20
+    budget_high = 80
+    servings    = 2
 
     @restaurant = find_restaurant(address, cuisines, budget_low)
 
@@ -78,8 +78,12 @@ class ApiTestsController < ApplicationController
     # Get a list of all restaurants that deliver to this address from the API
     @all_restaurants = @api.delivery_list(address)
 
+    # pp @all_restaurants
+    puts "We've found #{@all_restaurants.count} restaurants in the area"
+
     # Filter down to the valid restaurants for this purpose
     @valid_restaurants = get_valid_restaurants(@all_restaurants, cuisines, budget_low)
+    puts "We've found #{@valid_restaurants.count} valid restaurants in the area (cuisine and budget)"
 
     # Grab a random validated restaurant!
     @chosen_restaurant = @valid_restaurants.sample
@@ -96,14 +100,19 @@ class ApiTestsController < ApplicationController
   private
   
   def get_valid_restaurants(rest, cuisines, budget_low)
-    rest.select do |r|
-      ( 
+    valid_rest = rest.select do |r|
+       
         ( r["services"]["deliver"]["can"] == 1 ) &&
         ( r["services"]["deliver"]["time"] < 60 ) && 
         ( r["services"]["deliver"]["mino"] <= budget_low ) && 
-        ( cuisines.any? { |cuisine| r["cu"].include? cuisine } if r["cu"] ) 
-      )
+        ( r["cu"] ) && 
+        ( (r["cu"] & cuisines).any? ) 
+      
     end
+
+    binding.pry
+
+    valid_rest
   end
 
   def setup_api
