@@ -47,6 +47,8 @@ gem 'annotate'
 
 gem 'rest-client'
 
+gem 'devise'
+
 
 gem 'therubyracer', platforms: :ruby # or any other runtime
 gem 'less-rails'
