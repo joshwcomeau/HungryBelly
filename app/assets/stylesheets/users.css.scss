@@ -1,0 +1,42 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+.user_box {
+  position: relative; 
+  margin: 2rem auto; 
+  padding: 1rem;
+  width: 40%; 
+  min-width: 600px; 
+  text-align: center;
+
+  h2 {
+  font-size: 1.6rem;
+  color: $red;
+  margin-bottom: 1.5rem;
+  }
+
+
+  input {
+    margin-bottom: 0.5rem;
+    background: #DDD;
+    padding: 0.25rem;
+  }
+
+  input[type=submit] {
+    color: #FFF;
+    position: relative;
+    z-index: 2;
+    margin: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: $blue;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    text-shadow: 1px 1px 0px darken($blue, 10%);
+
+  }
+
+}
