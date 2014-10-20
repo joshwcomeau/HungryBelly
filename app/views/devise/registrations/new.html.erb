@@ -6,13 +6,38 @@
       <%= devise_error_messages! %>
 
       <div><%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %></div>
+        <%= f.email_field :email, autofocus: true %>
+      </div>
 
       <div><%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %></div>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
 
       <div><%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <br>
+      <h4>Preferences</h4>
+      
+      <table>
+        <tr>
+          <td><label><%= radio_button_tag 'cuisine_1', 'Japanese' %> Japanese</label></td>
+          <td><label><%= radio_button_tag 'cuisine_1', 'Chinese' %> Chinese</label></td>
+        </tr>
+        <tr>
+          <td><label><%= radio_button_tag 'cuisine_2', 'American' %> American</label></td>
+          <td><label><%= radio_button_tag 'cuisine_2', 'Greek' %> Greek</label></td>
+        </tr>
+        <tr>
+          <td><label><%= radio_button_tag 'cuisine_3', 'Indian' %> Indian</label></td>
+          <td><label><%= radio_button_tag 'cuisine_3', 'Italian' %> Italian</label></td>
+        </tr>
+      </table>
+
+      <br>
+      <h4>Budget</h4>
+      <%= f.select :budget, options_for_select([ ['20', 20], ['25', 25], [30, '30'], ['35', 35] ]) %>
 
       <div><%= f.submit "Sign up" %></div>
     <% end %>
